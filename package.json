@@ -1,0 +1,27 @@
+{
+  "name": "bouffesquejteprepare",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "tsc && node dist/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AdopteUnSport/BouffeSqueJtePrepare.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AdopteUnSport/BouffeSqueJtePrepare/issues"
+  },
+  "homepage": "https://github.com/AdopteUnSport/BouffeSqueJtePrepare#readme",
+  "dependencies": {
+    "@types/mocha": "^5.2.5",
+    "@types/node": "^10.12.18",
+    "express": "^4.16.4",
+    "mocha": "^5.2.0",
+    "mongoose": "^5.4.6"
+  }
+}
