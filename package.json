@@ -6,8 +6,12 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "tsc && node dist/index.js",
+<<<<<<< HEAD
     "stop": " node dist/index.stop.js",
     "gen": "node swaggerGenerator.js"
+=======
+    "stop": "node dist/index.stop.js"
+>>>>>>> c49c85f25ae4a6498b24560c642746f4c06af218
   },
   "repository": {
     "type": "git",
