@@ -8,7 +8,6 @@ generateTSFiles(
   config.file, // This can be either a file containing the Swagger json or the Swagger object itself
   {
     modelFolder: "./src/app/models",
-    enumTSFile: "./src/app/models/enums.ts"
-    // + optionally more configuration
+    enumTSFile: "./src/app/models/enums.ts",
   }
 );

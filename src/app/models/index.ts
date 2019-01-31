@@ -4,8 +4,6 @@
 */
 /* tslint:disable */
 
-export * from './validators';
-export * from './enums';
 export * from './recipe.model';
 export * from './category.model';
 export * from './user.model';

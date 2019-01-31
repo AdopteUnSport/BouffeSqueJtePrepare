@@ -1,4 +1,4 @@
-import { Ingredient } from "./ingredient.model";
+import { IIngredient } from './ingredient.model';
 
 export interface IUser {
     id?: number;
@@ -9,5 +9,6 @@ export interface IUser {
     password?: string;
     phone?: string;
     userStatus?: number;
-    listIngredient?: Array<Ingredient>;
+    listIngredient?: Array<IIngredient>;
 }
+
