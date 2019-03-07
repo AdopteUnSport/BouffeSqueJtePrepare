@@ -4,9 +4,8 @@
 */
 /* tslint:disable */
 
-export * from './recipe.model';
-export * from './category.model';
-export * from './user.model';
-export * from './tag.model';
-export * from './ingredient.model';
-export * from './api-response.model';
+export * from './recipeSchema';
+export * from './categorySchema';
+export * from './userSchema';
+export * from './ingredientSchema';
+export * from './enum'

@@ -1,14 +1,13 @@
 import { IIngredient } from './ingredient.model';
 
 export interface IUser {
-    id?: number;
+    id?: string;
     username?: string;
     firstName?: string;
     lastName?: string;
     email?: string;
     password?: string;
     phone?: string;
-    userStatus?: number;
     listIngredient?: Array<IIngredient>;
 }
 
