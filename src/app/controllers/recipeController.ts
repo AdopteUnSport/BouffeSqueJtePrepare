@@ -30,6 +30,6 @@ export class RecipeController{
     public async getRecipeById (req: Request, res: Response) { 
  
          
-        res.json( await recipeService.getRecipe(req))
+        res.json( await recipeService.getRecipeById(req))
     }
 }

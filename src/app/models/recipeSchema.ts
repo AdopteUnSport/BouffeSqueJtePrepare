@@ -20,5 +20,5 @@ var recipeSchema = new Schema({
   
   
 });
-recipeSchema.index({"name" : "text","description" : "text","tags" : "text", "listIngredient.name":"text", "listIngredient.quantity":1 })
+recipeSchema.index({"name" : "text","description" : "text","tags" : "text", "listIngredient.name":"text"})
 export default recipeSchema

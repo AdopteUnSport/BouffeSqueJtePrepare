@@ -7,8 +7,9 @@ class RecipeService{
     private recipeRepository = new RecipeRepository()
     public async addNewRecipe (req: Request) {  
         const newRecipe = req.body as IRecipe     
+        const res = await this.recipeRepository.addNewRecipe(newRecipe)
         console.log("patae"+JSON.stringify(newRecipe))                
-        return await this.recipeRepository.addNewRecipe(newRecipe)
+        return res
     }
     public async updateRecipe (req: Request) {  
         const newRecipe = req.body as IRecipe     
@@ -26,7 +27,9 @@ class RecipeService{
             listIngredient: req.body.listIngredient ? req.body.listIngredient : null,
             quantity : req.body.quantity ? req.body.quantity : null
         } as  IRecipeParametter    
+        console.log("test0"+ JSON.stringify(params))
         if(!params.text && !params.listIngredient){
+            console.log("test1")
             return await this.recipeRepository.getAll()
         }else if(params.text){
             return await this.recipeRepository.getRecipeByText(params)
