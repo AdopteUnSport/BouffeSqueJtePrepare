@@ -1,10 +1,12 @@
 import {Request, Response} from "express";
 import { UserController } from "../app/controllers/userController";
 import { RecipeController } from "../app/controllers/recipeController";
+import { ArchiveController } from "../app/controllers/archiveController";
 
 export class Routes {    
     public userController : UserController = new UserController()
     public recipeController : RecipeController = new RecipeController()
+    public archiveController : ArchiveController = new ArchiveController()
     public routes(app): void {   
         app.route('/recipe') 
         // GET endpoint 
@@ -37,5 +39,16 @@ export class Routes {
         .post(this.userController.addIngredient)
         .put(this.userController.updateListeIngredient)
         .delete(this.userController.deleteListeIngredient)
+        app.route('/archive') 
+        // GET endpoint 
+        .get(this.archiveController.getAllArchive)        
+        // POST endpoint
+        .post(this.archiveController.addArchive)
+
+        app.route('/user/:userId/archive')
+        // get specific contact
+        .get(this.archiveController.getArchive)
+        .put(this.archiveController.updateArchive)
+        .delete(this.archiveController.deleteArchive)
     }
 }

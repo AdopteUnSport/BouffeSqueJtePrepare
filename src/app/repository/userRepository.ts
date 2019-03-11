@@ -8,30 +8,55 @@ const User = mongoose.model('User', userSchema);
 export class UserRepository{
 
 
-public addNewUser (userNew:IUser) {                
-       const userNewToAdd = new User(userNew)
+public addNewUser (userNew:IUser) { 
+    try {
+        const userNewToAdd = new User(userNew)
         userNewToAdd.save()
     return userNewToAdd
+    } catch (error) {
+        console.log(error)
+    }               
+      
     }
     public async getAllUser() : Promise<IUser[]>{
-     const doc = await User.find().exec()
-     const res =[]
-     await doc.forEach(element=>{
-         res.push(element.toObject())
-     })
-       return res
+        try {
+            const doc = await User.find().exec()
+            const res =[]
+            await doc.forEach(element=>{
+                res.push(element.toObject())
+            })
+              return res
+        } catch (error) {
+            console.log(error)
+        }
+    
     }
     public async  getUser(id : string) {
-        const doc = await User.findById(id).exec()
-        return doc.toObject()
+        try {
+            const doc = await User.findById(id).exec()
+            return doc.toObject()
+        } catch (error) {
+            console.log(error)
+        }
+     
     }
     public async updateUser(id: string , updatedUser : IUser) {
-        const doc = await User.findByIdAndUpdate(id,updatedUser)
-        return doc.toObject()
+        try {
+            const doc = await User.findByIdAndUpdate(id,updatedUser)
+            return doc.toObject()
+        } catch (error) {
+            console.log(error)
+        }
+       
     }
     public async deleteUser(id: string) {
-        const doc = await User.findByIdAndRemove(id)
-        return doc.toObject()
+        try {
+            const doc = await User.findByIdAndRemove(id)
+            return doc.toObject()
+        } catch (error) {
+            console.log(error)
+        }
+       
     }
    
 }

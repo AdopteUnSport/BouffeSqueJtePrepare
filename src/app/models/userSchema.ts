@@ -26,7 +26,7 @@ export const userSchema = new Schema({
     required : true
 },
   phone:  String,
-  listIngredient: [ingredientSchema]
+  fridge: [ingredientSchema]
   
 });
 

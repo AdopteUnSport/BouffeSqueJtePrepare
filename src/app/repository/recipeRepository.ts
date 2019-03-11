@@ -23,23 +23,42 @@ export class RecipeRepository{
        }
         
     }
-    public async updateRecipe (newRecipe:IRecipe) : Promise<IRecipe> {                
-        const doc = await  Recipe.findByIdAndUpdate(newRecipe.id,newRecipe).exec();
-     return   doc.toObject()
+    public async updateRecipe (newRecipe:IRecipe) : Promise<IRecipe> {
+        try {
+            const id = newRecipe._id;
+            console.log("patate0"+id)
+            delete newRecipe._id
+            console.log("patate"+id)
+            const doc = await  Recipe.findByIdAndUpdate(id,newRecipe)
+            return   doc.toObject()
+        } catch (error) {
+            console.log(error)
+        }                
+       
       
      }
-     public async deleteRecipe (newRecipe:string): Promise<IRecipe>  {                
-        const doc= await   Recipe.findByIdAndRemove(newRecipe).exec()
+     public async deleteRecipe (newRecipe:string): Promise<IRecipe>  {    
+         try {
+            const doc= await   Recipe.findByIdAndRemove(newRecipe)
       
-     return doc.toObject()
+            return doc.toObject()
+         } catch (error) {
+             console.log(error)
+         }            
+       
      }
-    public async getRecipeByText (params:IRecipeParametter): Promise<IRecipe[]>{                
-        const doc = await  Recipe.find({$text:{$search:params.text}}).exec()
-        const arrayRecipe =[];
-        await doc.forEach(element=>{
-            arrayRecipe.push(element.toObject())
-        })
-     return arrayRecipe
+    public async getRecipeByText (params:IRecipeParametter): Promise<IRecipe[]>{  
+        try {
+            const doc = await  Recipe.find({$text:{$search:params.text}})
+            const arrayRecipe =[];
+            await doc.forEach(element=>{
+                arrayRecipe.push(element.toObject())
+            })
+         return arrayRecipe
+        } catch (error) {
+            console.log(error)
+        }              
+    
     }
     public async getRecipeById (id:string): Promise<IRecipe>  { 
         try {
@@ -56,7 +75,7 @@ export class RecipeRepository{
     public async getAll (): Promise<IRecipe[]> {    
         try {
           
-            const doc = await Recipe.find().exec()
+            const doc = await Recipe.find()
             console.log("test"+JSON.stringify(doc))    
             const arrayRecipe =[];
             await  doc.forEach(element=>{
@@ -69,12 +88,19 @@ export class RecipeRepository{
         }  
       
     }
-    public async getRecipeByIngredient (params:IRecipeParametter): Promise<IRecipe[]> {                
-        const doc = await  Recipe.find({"listIngredient.name":"params.listIngredient.name"}).exec()
-        const arrayRecipe =[];
-        await doc.forEach(element=>{
-            arrayRecipe.push(element.toObject())
-        })
-     return arrayRecipe
+    public async getRecipeByIngredient (params:IRecipeParametter): Promise<IRecipe[]> {    
+        try {
+            console.log("ByIngreient"+JSON.stringify(params))
+        
+            const doc = await  Recipe.find({"listIngredient.name":"params.listIngredient.name"})
+            const arrayRecipe =[];
+            await doc.forEach(element=>{
+                arrayRecipe.push(element.toObject())
+            })
+         return arrayRecipe
+        } catch (error) {
+            console.log(error)
+        }            
+     
     }
 }

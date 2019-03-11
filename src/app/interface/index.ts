@@ -9,3 +9,4 @@ export * from './category.model';
 export * from './user.model';
 export * from './ingredient.model';
 export * from './api-response.model';
+export * from './archive.model'

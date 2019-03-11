@@ -3,7 +3,7 @@
 import { IIngredient } from "./ingredient.model";
 
 export interface IRecipe {
-    id: number;
+    _id: number;
     name:string;
     description: string;
     listIngredient: Array<IIngredient>;

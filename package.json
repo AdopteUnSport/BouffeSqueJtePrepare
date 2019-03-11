@@ -7,7 +7,8 @@
     "build": "tsc",
     "dev": "ts-node ./src/index.ts",
     "start": "nodemon ./dist/index.js",
-    "prod": "npm run build && npm run start"
+    "prod": "npm run build && npm run start",
+    "test": "mocha -r ts-node/register src/**/*.spec.ts"
   },
   "repository": {
     "type": "git",
@@ -26,9 +27,14 @@
     "express": "^4.16.4",
     "mongoose": "^5.4.10",
     "nodemon": "^1.18.9",
-    "ts-node": "^8.0.2",
     "tslint": "^5.13.1",
     "typescript": "^3.3.1"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "@types/chai": "^4.1.7",
+    "@types/mocha": "^5.2.6",
+    "chai": "^4.2.0",
+    "mocha": "^6.0.2",
+    "ts-node": "^8.0.3"
+  }
 }
