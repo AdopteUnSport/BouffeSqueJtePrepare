@@ -8,7 +8,7 @@ import { IUser, IIngredient } from '../interface';
     public async addNewContact (req: Request) {  
         const newUser = req.body as IUser      
         
-        return this.userRepository.addNewUser(newUser)
+        return await this.userRepository.addNewUser(newUser)
     }
     public async getAllUser() {
         

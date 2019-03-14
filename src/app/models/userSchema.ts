@@ -5,7 +5,7 @@ import * as mongoose from 'mongoose';
 var Schema = mongoose.Schema;
 
 export const userSchema = new Schema({
-  username:  {
+  userName:  {
     type:String,
     required : true
 },

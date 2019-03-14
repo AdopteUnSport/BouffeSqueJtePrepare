@@ -8,10 +8,10 @@ const User = mongoose.model('User', userSchema);
 export class UserRepository{
 
 
-public addNewUser (userNew:IUser) { 
+public async  addNewUser (userNew:IUser) { 
     try {
         const userNewToAdd = new User(userNew)
-        userNewToAdd.save()
+        await userNewToAdd.save()
     return userNewToAdd
     } catch (error) {
         console.log(error)
@@ -42,7 +42,9 @@ public addNewUser (userNew:IUser) {
     }
     public async updateUser(id: string , updatedUser : IUser) {
         try {
+            console.log(JSON.stringify(updatedUser))
             const doc = await User.findByIdAndUpdate(id,updatedUser)
+          
             return doc.toObject()
         } catch (error) {
             console.log(error)
