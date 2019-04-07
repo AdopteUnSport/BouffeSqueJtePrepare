@@ -36,7 +36,7 @@ export class ArchiveController {
     public addArchive(req: Request, res: Response) {
        
 
-        res.json(archiveService.AddArchive(req))
+        res.json(archiveService.addArchive(req))
     }
     
 
