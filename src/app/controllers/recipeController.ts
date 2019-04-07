@@ -7,6 +7,11 @@ import { recipeService } from '../service/recipeService';
 
 export class RecipeController{
 
+    public async test(req: Request, res: Response) { 
+ 
+         
+        res.json("await recipeService.addNewRecipe(req)")
+       }
     public async addNewRecipe (req: Request, res: Response) { 
  
          

@@ -7,7 +7,8 @@ export class Routes {
     public userController : UserController = new UserController()
     public recipeController : RecipeController = new RecipeController()
     public archiveController : ArchiveController = new ArchiveController()
-    public routes(app): void {   
+    public routes(app): void {  
+        app.route('/').get(this.recipeController.test) 
         app.route('/recipe') 
         // GET endpoint 
         .get(this.recipeController.getRecipe)        
