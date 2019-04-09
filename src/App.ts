@@ -8,7 +8,7 @@ class App {
 
   public app: express.Application;
   public routePrv: Routes = new Routes();
-  public mongoUrl: string = 'mongodb://51.83.70.42:27017/CRMdb';  
+  public mongoUrl: string = 'mongodb://localhost/Bouffe';  
   constructor() {
       this.app = express();
       this.config();        

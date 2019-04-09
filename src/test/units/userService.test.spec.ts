@@ -6,7 +6,7 @@ import 'mocha';
 import { userService } from '../../app/service/userService';
 import mongoose = require("mongoose");
 
-const MONGODB_CONNECTION: string = "mongodb://51.83.70.42:27017/testBd";
+const MONGODB_CONNECTION: string = "mongodb://localhost:27017/testBd";
 mongoose.connect(MONGODB_CONNECTION, { useNewUrlParser: true });
 
 describe('user Service', () => {
