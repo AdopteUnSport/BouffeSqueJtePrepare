@@ -1,5 +1,5 @@
 #!/bin/sh
-echo %username%
+echo "$USER"
 cd ~/pierre/BouffeSqueJtePrepare
  git pull
  npm install 
