@@ -10,7 +10,7 @@ export class RecipeController{
     public async test(req: Request, res: Response) { 
  
          
-        res.json("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaawait recipeService.addNewRecipe(req)")
+        res.json("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaawait recipeService.addNewRecipe(req)")
        }
     public async addNewRecipe (req: Request, res: Response) { 
  
