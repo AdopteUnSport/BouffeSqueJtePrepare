@@ -1,5 +1,6 @@
 #!/bin/sh
-cd ~/BouffeSqueJtePrepare
+echo %username%
+cd ~/pierre/BouffeSqueJtePrepare
  git pull
  npm install 
  npm run dev
