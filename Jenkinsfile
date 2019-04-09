@@ -1,8 +1,11 @@
 pipeline {
-  agent any
-    
-  tools {nodejs "good node"}
-    
+   agent {
+        docker {
+            image 'node:6-alpine' 
+            args '-p 3000:3000' 
+        }
+  }  
+  
   stages {
         
     stage('Cloning Git') {
@@ -13,7 +16,6 @@ pipeline {
         
     stage('Install dependencies') {
       steps {
-        sh 'node -v'
         sh 'npm install'
       }
     }
