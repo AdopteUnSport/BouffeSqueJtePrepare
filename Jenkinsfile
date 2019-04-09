@@ -25,7 +25,7 @@ pipeline {
     }    
     stage('launch') {
       steps {
-         sh 'npm run dev'
+         sh 'pwd'
       }
     }   
   }
