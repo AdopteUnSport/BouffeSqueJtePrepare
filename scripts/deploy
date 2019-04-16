@@ -4,6 +4,7 @@ pwd
 cd /
 pwd
 cd /home/pierre/BouffeSqueJtePrepare
+pwd
 git pull
 npm install
 npm run dev
