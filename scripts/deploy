@@ -3,7 +3,7 @@ echo "$USER"
 pwd
 cd /
 pwd
-cd /home/anthony/BouffeSqueJtePrepare
+cd /home/pierre/BouffeSqueJtePrepare
 git pull
 npm install
 npm run dev
