@@ -7,5 +7,5 @@ cd /home/node-app/BouffeSqueJtePrepare/
 pwd
 git pull 
 npm install
-npm run dev
+pm2 start ./dist/index.js
 exit
