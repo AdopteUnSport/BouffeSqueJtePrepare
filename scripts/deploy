@@ -1,6 +1,9 @@
 #!/bin/sh
 echo "$USER"
-cd ~/home/anthony/BouffeSqueJtePrepare
+pwd
+cd ../../
+pwd
+cd /home/anthony/BouffeSqueJtePrepare
 git pull
 npm install
 npm run dev
