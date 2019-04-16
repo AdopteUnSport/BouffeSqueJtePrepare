@@ -3,7 +3,7 @@ echo "$USER"
 pwd
 cd /
 pwd
-cd /home/jenkins/
+cd /home/node-app/
 pwd
 git clone https://github.com/AdopteUnSport/BouffeSqueJtePrepare.git
 npm install
