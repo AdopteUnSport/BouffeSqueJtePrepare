@@ -3,9 +3,9 @@ echo "$USER"
 pwd
 cd /
 pwd
-cd /home/pierre/BouffeSqueJtePrepare
+cd /home/jenkins/
 pwd
-git pull
+git clone https://github.com/AdopteUnSport/BouffeSqueJtePrepare.git
 npm install
 npm run dev
 exit
