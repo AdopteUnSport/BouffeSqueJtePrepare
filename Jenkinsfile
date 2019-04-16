@@ -22,8 +22,7 @@ pipeline {
     }    
     stage('Deliver') { 
             steps {
-                sh './scripts/deploy.sh' 
-                sh './scripts/kill.sh' 
+                sh './scripts/deploy' 
             }
     }
   }
