@@ -1,7 +1,7 @@
 #!/bin/sh
 echo "$USER"
 pwd
-cd ../../
+cd /
 pwd
 cd /home/anthony/BouffeSqueJtePrepare
 git pull
