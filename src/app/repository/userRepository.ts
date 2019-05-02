@@ -8,15 +8,15 @@ const User = mongoose.model('User', userSchema);
 export class UserRepository{
 
 
-public async  addNewUser (userNew:IUser) { 
+public async  addNewUser (userNew:IUser) {
     try {
-        const userNewToAdd = new User(userNew)
-        await userNewToAdd.save()
-    return userNewToAdd
+        const userNewToAdd = new User(userNew);
+        const res = await userNewToAdd.save()
+    return res.toObject()
     } catch (error) {
         console.log(error)
-    }               
-      
+    }
+
     }
     public async getAllUser() : Promise<IUser[]>{
         try {
@@ -29,7 +29,7 @@ public async  addNewUser (userNew:IUser) {
         } catch (error) {
             console.log(error)
         }
-    
+
     }
     public async  getUser(id : string) {
         try {
@@ -38,18 +38,18 @@ public async  addNewUser (userNew:IUser) {
         } catch (error) {
             console.log(error)
         }
-     
+
     }
     public async updateUser(id: string , updatedUser : IUser) {
         try {
             console.log(JSON.stringify(updatedUser))
             const doc = await User.findByIdAndUpdate(id,updatedUser)
-          
+
             return doc.toObject()
         } catch (error) {
             console.log(error)
         }
-       
+
     }
     public async deleteUser(id: string) {
         try {
@@ -58,7 +58,7 @@ public async  addNewUser (userNew:IUser) {
         } catch (error) {
             console.log(error)
         }
-       
+
     }
-   
+
 }

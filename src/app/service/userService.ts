@@ -5,13 +5,14 @@ import { IUser, IIngredient } from '../interface';
 
  class UserService{
     private userRepository = new UserRepository()
-    public async addNewContact (req: Request) {  
-        const newUser = req.body as IUser      
+    public async addNewContact (req: Request) {
+        const newUser = req.body as IUser
+        const res = await this.userRepository.addNewUser(newUser);
         
-        return await this.userRepository.addNewUser(newUser)
+        return res;
     }
     public async getAllUser() {
-        
+
        return this.userRepository.getAllUser()
     }
     public async getUser(req: Request) {
@@ -46,7 +47,7 @@ import { IUser, IIngredient } from '../interface';
         return  await this.userRepository.updateUser(user._id,user)
     }
     public async deleteListeIngredient(req: Request) {
-      
+
         const user :IUser =await this.userRepository.getUser(req.params.userId)
         user.fridge=[];
         return  await this.userRepository.updateUser(user._id,user)

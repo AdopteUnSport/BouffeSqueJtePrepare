@@ -6,43 +6,45 @@ import { userService } from '../service/userService';
 
 export class UserController {
 
-    public getAllUser(req: Request, res: Response) {
-        res.json(userService.getAllUser())
-    }
-    public getUser(req: Request, res: Response) {
-
-        res.json(userService.getUser(req))
-    }
-    public updateUser(req: Request, res: Response) {
-       
-
-        res.json(userService.updateUser(req))
-    }
-    public deleteUser(req: Request, res: Response) {
-       
-        res.json(userService.deleteUser(req))
-    }
-    public getListeIngredient(req: Request, res: Response) {
+    public async getAllUser(req: Request, res: Response) {
+        const user =  await userService.getAllUser()
         
+        res.json(user)
+    }
+    public async getUser(req: Request, res: Response) {
 
-        res.json(userService.getListeIngredient(req))
+        res.json(await userService.getUser(req))
     }
-    public addIngredient(req: Request, res: Response) {
-     
-        res.json(userService.addIngredient(req))
-    }
-    public updateListeIngredient(req: Request, res: Response) {
-       
+    public async updateUser(req: Request, res: Response) {
 
-        res.json(userService.updateListeIngredient(req))
+
+        res.json(await userService.updateUser(req))
     }
-    public deleteListeIngredient(req: Request, res: Response) {
-    
-        res.json(userService.deleteListeIngredient(req))
+    public async deleteUser(req: Request, res: Response) {
+
+        res.json(await userService.deleteUser(req))
     }
-    public addNewContact(req: Request, res: Response) {
-    
-        res.json(userService.addNewContact(req))
+    public async getListeIngredient(req: Request, res: Response) {
+
+
+        res.json(await userService.getListeIngredient(req))
+    }
+    public async addIngredient(req: Request, res: Response) {
+
+        res.json(await userService.addIngredient(req))
+    }
+    public async updateListeIngredient(req: Request, res: Response) {
+
+
+        res.json(await userService.updateListeIngredient(req))
+    }
+    public async deleteListeIngredient(req: Request, res: Response) {
+
+        res.json(await userService.deleteListeIngredient(req))
+    }
+    public async addNewContact(req: Request, res: Response) {
+
+        res.json(await userService.addNewContact(req))
     }
 
 }

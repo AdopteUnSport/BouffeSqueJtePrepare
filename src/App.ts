@@ -8,11 +8,11 @@ class App {
 
   public app: express.Application;
   public routePrv: Routes = new Routes();
-  public mongoUrl: string = 'mongodb://localhost/Bouffe';  
+  public mongoUrl: string = 'mongodb://localhost/Bouffe';
   constructor() {
       this.app = express();
-      this.config();        
-      this.routePrv.routes(this.app);     
+      this.config();
+      this.routePrv.routes(this.app);
       this.mongoSetup();
   }
 
@@ -22,7 +22,7 @@ class App {
   }
   private mongoSetup(): void{
    // (<any>mongoose.Promise )= global.Promise;
-    mongoose.connect(this.mongoUrl,{useNewUrlParser: true} );    
+    mongoose.connect(this.mongoUrl,{useNewUrlParser: true} );
 }
 }
 
