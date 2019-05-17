@@ -27,7 +27,14 @@ export class Routes {
         .get(this.userController.getAllUser)        
         // POST endpoint
         .post(this.userController.addNewContact)
-
+        app.route('/user/login') 
+        
+        // POST endpoint
+        .post(this.userController.login)
+        app.route('/user/logout') 
+        
+        // POST endpoint
+        .post(this.userController.logout)
         // Contact detail
         app.route('/user/:userId')
         // get specific contact

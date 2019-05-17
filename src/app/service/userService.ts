@@ -15,6 +15,20 @@ import { IUser, IIngredient } from '../interface';
 
        return this.userRepository.getAllUser()
     }
+    public async login(req: Request) {
+     
+        const users :IUser[] =await  this.userRepository.getUsersByName(req.body.userName)
+        let res  ;
+        for(var user of users){
+            if(user.userName===req.body.userName && user.password===req.body.password){
+                res = user;
+                
+                break;
+            }
+        
+        }
+        return res;
+    }
     public async getUser(req: Request) {
         console.log(JSON.stringify(this))
 

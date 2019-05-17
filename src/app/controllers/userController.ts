@@ -1,7 +1,7 @@
 
 import { Request, Response } from 'express';
 import { userService } from '../service/userService';
-
+var _ =require("lodash")
 
 
 export class UserController {
@@ -45,6 +45,19 @@ export class UserController {
     public async addNewContact(req: Request, res: Response) {
 
         res.json(await userService.addNewContact(req))
+    }
+    public async login(req: Request, res: Response) {
+        // mettre en place norme JWT a voir si on utilise 2 serveurs
+        const user = await userService.login(req)
+        if(_.isNil(user)){
+            res.status(400).json("Erreur dans l'authentification ")
+        }
+        res.json(user)
+    }
+    public async logout(req: Request, res: Response) {
+        // mettre en place norme JWT ici suppression du token enregistrer en db$*
+        
+        res.json("disconnected")
     }
 
 }

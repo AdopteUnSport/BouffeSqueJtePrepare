@@ -40,6 +40,20 @@ public async  addNewUser (userNew:IUser) {
         }
 
     }
+    public async  getUsersByName(byName : string) {
+        try {
+            const doc = await User.find({userName: byName}).exec()
+            console.log(JSON.stringify(doc))
+            const res =[]
+            await doc.forEach(element=>{
+                res.push(element.toObject())
+            })
+              return res
+        } catch (error) {
+            console.log(error)
+        }
+
+    }
     public async updateUser(id: string , updatedUser : IUser) {
         try {
             console.log(JSON.stringify(updatedUser))
