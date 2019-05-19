@@ -6,9 +6,9 @@ import * as express from "express";
 const options:cors.CorsOptions = {
   allowedHeaders: ["Origin", "X-Requested-With", "Content-Type", "Accept", "X-Access-Token","Access-Control-Allow-Origin"],
   exposedHeaders :["Origin", "X-Requested-With", "Content-Type", "Accept", "X-Access-Token","Access-Control-Allow-Origin"],
-  credentials: true,
+ 
   methods: ["GET,HEAD,OPTIONS,PUT,PATCH,POST,DELETE"],
-  origin: true,
+  origin:"*",
   preflightContinue: false
 };
 
