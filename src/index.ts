@@ -1,8 +1,8 @@
 import app from "./App";
 import * as cors from "cors";
-
+import * as express from "express";
 //get router
-
+const router = express.Router()
 //options for cors midddleware
 const options:cors.CorsOptions = {
   allowedHeaders: ["Origin", "X-Requested-With", "Content-Type", "Accept", "X-Access-Token","Access-Control-Allow-Origin"],
@@ -13,12 +13,12 @@ const options:cors.CorsOptions = {
 };
 
 //use cors middleware
-app.use(cors(options));
+router.use(cors(options));
 
 //add your routes
 
 //enable pre-flight
-app.options("*", cors(options));
+router.options("*", cors(options));
 const PORT = 3000;
 app.listen(PORT, () => {
     console.log('Express server listening on port ' + PORT);
