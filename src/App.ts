@@ -1,6 +1,7 @@
 // lib/app.ts
 
 import * as express from "express";
+import * as cors from "cors";
 import * as bodyParser from "body-parser";
 import { Routes } from "./routes/crmRoutes";
 import * as mongoose from "mongoose"
@@ -11,8 +12,21 @@ class App {
   public mongoUrl: string = 'mongodb://localhost/Bouffe';
   constructor() {
       this.app = express();
+      const options:cors.CorsOptions = {
+        allowedHeaders: ["Origin", "X-Requested-With", "Content-Type", "Accept", "X-Access-Token","Access-Control-Allow-Origin"],
+        exposedHeaders :["Origin", "X-Requested-With", "Content-Type", "Accept", "X-Access-Token","Access-Control-Allow-Origin"],
+       
+        methods: ["GET,HEAD,OPTIONS,PUT,PATCH,POST,DELETE"],
+        origin:"*",
+        preflightContinue: false
+      };
+      
+      //use cors middleware
+      this.app.use(cors(options));
+    
       this.config();
       this.routePrv.routes(this.app);
+      this.app.options("*", cors(options));
       this.mongoSetup();
   }
 
