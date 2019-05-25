@@ -5,7 +5,7 @@ cd /
 pwd
 cd /home/node-app/BouffeSqueJtePrepare/
 pwd
-export BUILD_ID=dontKillMe
+export JENKINS_NODE_COOKIE=dontKillMe
 git pull 
 npm install
 npm run build
