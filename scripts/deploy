@@ -5,8 +5,10 @@ cd /
 pwd
 cd /home/node-app/BouffeSqueJtePrepare/
 pwd
+export BUILD_ID=dontKillMePlease
 git pull 
 npm install
 npm run build
-pm2 start ./dist/index.js
+
+pm2 restart ./dist/index.js
 exit
