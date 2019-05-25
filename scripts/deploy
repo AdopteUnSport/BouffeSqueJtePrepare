@@ -10,5 +10,5 @@ git pull
 npm install
 npm run build
 
-pm2 restart ./dist/index.js
+pm2 start ./dist/index.js
 exit
