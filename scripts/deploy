@@ -5,7 +5,7 @@ cd /
 pwd
 cd /home/node-app/BouffeSqueJtePrepare/
 pwd
-export BUILD_ID=dontKillMePlease
+export BUILD_ID=dontKillMe
 git pull 
 npm install
 npm run build
