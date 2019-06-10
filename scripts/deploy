@@ -4,5 +4,5 @@ pwd
 export JENKINS_NODE_COOKIE=dontKillMe
 npm run build
 pm2 delete all
-#pm2 start -f ./dist/index.js
+pm2 start -f ./dist/index.js
 exit
