@@ -29,6 +29,9 @@
     "mongoose": "^5.4.10",
     "nodemon": "^1.18.9",
     "pm2": "^3.5.0",
+    "swagger-express-ts": "^1.0.1",
+    "swagger-ui-dist": "^3.22.3",
+    "swagger-ui-express": "^4.0.6",
     "tslint": "^5.13.1",
     "typescript": "^3.3.1"
   },

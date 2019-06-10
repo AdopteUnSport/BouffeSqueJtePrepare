@@ -602,28 +602,17 @@
 					"type": "integer",
 					"format": "int64"
 				},
-				"urlRecipe": {
-					"type": "string",
-					"format": "string"
-				},
 				"listIngredient": {
 					"type": "array",
 					"items": {
 						"$ref": "#/definitions/Ingredient"
 					}
 				},
-				"status": {
-					"type": "string",
-					"description": "Order Status",
-					"enum": [
-						"placed",
-						"approved",
-						"delivered"
-					]
+				"name": {
+					"type": "string"
 				},
-				"complete": {
-					"type": "boolean",
-					"default": false
+				"description": {
+					"type": "string"
 				}
 			},
 			"xml": {
@@ -686,21 +675,6 @@
 				"name": "User"
 			}
 		},
-		"Tag": {
-			"type": "object",
-			"properties": {
-				"id": {
-					"type": "integer",
-					"format": "int64"
-				},
-				"name": {
-					"type": "string"
-				}
-			},
-			"xml": {
-				"name": "Tag"
-			}
-		},
 		"Ingredient": {
 			"type": "object",
 			"required": [
@@ -724,31 +698,22 @@
 				},
 				"photoUrls": {
 					"type": "array",
-					"xml": {
-						"name": "photoUrl",
-						"wrapped": true
-					},
 					"items": {
 						"type": "string"
 					}
 				},
 				"tags": {
 					"type": "array",
-					"xml": {
-						"name": "tag",
-						"wrapped": true
-					},
 					"items": {
-						"$ref": "#/definitions/Tag"
+						"type": "string"
 					}
 				},
 				"status": {
 					"type": "string",
 					"description": "pet status in the store",
 					"enum": [
-						"available",
-						"pending",
-						"sold"
+						"fresh",
+						"out of date"
 					]
 				}
 			},
