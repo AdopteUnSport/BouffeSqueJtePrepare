@@ -8,7 +8,7 @@ import { IUser, IIngredient } from '../interface';
     public async addNewContact (req: Request) {
         const newUser = req.body as IUser
         const res = await this.userRepository.addNewUser(newUser);
-        
+        console.log("PATAE"+JSON.stringify(res))
         return res;
     }
     public async getAllUser() {

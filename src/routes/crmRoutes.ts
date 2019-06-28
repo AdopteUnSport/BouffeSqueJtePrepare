@@ -1,13 +1,16 @@
-import {Request, Response} from "express";
+import * as express from "express";
 import { UserController } from "../app/controllers/userController";
 import { RecipeController } from "../app/controllers/recipeController";
 import { ArchiveController } from "../app/controllers/archiveController";
+import { AuthController } from "../app/controllers/authController";
+import authMiddleware from "../app/middlewares/auth.middleware";
 
 export class Routes {    
+    public authController : AuthController = new AuthController()
     public userController : UserController = new UserController()
     public recipeController : RecipeController = new RecipeController()
     public archiveController : ArchiveController = new ArchiveController()
-    public routes(app): void {  
+    public routes(app : express.Application): void {  
         app.route('/').get(this.recipeController.test) 
         app.route('/recipe') 
         // GET endpoint 
@@ -22,19 +25,19 @@ export class Routes {
         .put(this.recipeController.updateRecipe)
         .delete(this.recipeController.deleteRecipe)
         // Contact 
-        app.route('/user') 
+        app.route('/user')
         // GET endpoint 
-        .get(this.userController.getAllUser)        
+        .get(authMiddleware,this.userController.getAllUser)      
         // POST endpoint
-        .post(this.userController.addNewContact)
+        .post(this.authController.addNewContact)
         app.route('/user/login') 
         
         // POST endpoint
-        .post(this.userController.login)
+        .post(this.authController.login)
         app.route('/user/logout') 
         
         // POST endpoint
-        .post(this.userController.logout)
+        .post(this.authController.logout)
         // Contact detail
         app.route('/user/:userId')
         // get specific contact
