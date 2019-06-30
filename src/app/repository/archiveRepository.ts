@@ -9,10 +9,10 @@ const Archive = mongoose.model('Archive', archiveSchema);
 export class ArchiveRepository{
 
 
-public addNewArchive (archiveNew:IArchive) {     
+public async addNewArchive (archiveNew:IArchive) {     
     try {
         const archiveNewToAdd = new Archive(archiveNew)
-        archiveNewToAdd.save()
+       await archiveNewToAdd.save()
     return archiveNewToAdd
     } catch (error) {
         

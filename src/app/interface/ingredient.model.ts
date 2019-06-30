@@ -3,7 +3,7 @@ import { ICategory } from './category.model';
 
 
 export interface IIngredient {
-    _id: number;
+    _id: string;
     category: ICategory;
     name: string;
     quantity : number;
