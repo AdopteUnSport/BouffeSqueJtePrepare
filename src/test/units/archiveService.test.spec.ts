@@ -11,20 +11,20 @@ import { IArchive, IIngredient } from '../../app/interface';
 const MONGODB_CONNECTION: string = "mongodb://localhost:27017/testBd";
 mongoose.connect(MONGODB_CONNECTION, { useNewUrlParser: true });
 
-describe('archive Service', () => {
+describe.only('archive Service', () => {
   after(function () {
-    mongoose.connection.db.dropDatabase()
+    mongoose.connection.db.dropCollection("archive")
   })
 
 
-  describe.only('getArchive', () => {
+  describe('getArchive', () => {
 
     it('should return array of length 0', async () => {
       
       const result = await archiveService.getAllArchive()
       expect(result).to.be.an("array").of.lengthOf(0)
     });
-    it.only('should return array of length 1', async () => {
+    it('should return array of length 1', async () => {
       const reqPost = {
         body: {
          
