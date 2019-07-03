@@ -6,6 +6,7 @@ import TokenData from '../interface/tokenData.model';
 import * as jwt from 'jsonwebtoken';
 import { IUser } from '../interface';
 import DataStoredInToken from '../interface/dataStoredInToken.model';
+import { isNullOrUndefined } from 'util';
 
 var _ =require("lodash")
 
@@ -13,14 +14,21 @@ var _ =require("lodash")
 export class AuthController {
   
     public async addNewContact(req: Request, res: Response) {
-        const user : IUser= await userService.addNewContact(req)
-        user.password= undefined
-
-        // a enlever pour faire la verification par mail
-        /*const tokenData = await authService.createToken(user);
-        const refreshToken = await authService.createRefreshToken(user);
-        res.setHeader('Set-Cookie', [authService.createCookie(tokenData),authService.createCookieRefresh(refreshToken)]);*/
-        res.send(user);
+        
+        const userExist = await userService.getUserByEmail(req)
+        console.log("PATAE"+JSON.stringify(userExist))
+        if(isNullOrUndefined(userExist)){
+            console.log("Dieumi")
+            const user : IUser= await userService.addNewContact(req)
+            user.password= undefined
+    
+            // a enlever pour faire la verification par mail
+            /*const tokenData = await authService.createToken(user);
+            const refreshToken = await authService.createRefreshToken(user);
+            res.setHeader('Set-Cookie', [authService.createCookie(tokenData),authService.createCookieRefresh(refreshToken)]);*/
+            res.send(user);
+        }
+        res.send(new Error("email already exist"));
     }
     public async login(req: Request, res: Response) {
         // mettre en place norme JWT a voir si on utilise 2 serveurs

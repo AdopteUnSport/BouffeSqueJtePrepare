@@ -34,6 +34,11 @@ import { IUser, IIngredient } from '../interface';
 
         return this.userRepository.getUser(req.params.userId)
     }
+    public async getUserByEmail(req: Request) {
+        console.log(JSON.stringify(this))
+
+        return this.userRepository.getUserByEmail(req.body.email)
+    }
     public async updateUser(req: Request) {
         const updatedUser = req.body as IUser
         return await this.userRepository.updateUser(req.params.userId,updatedUser)

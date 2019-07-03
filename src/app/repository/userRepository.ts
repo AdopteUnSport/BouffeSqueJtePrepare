@@ -40,6 +40,15 @@ public async  addNewUser (userNew:IUser) {
         }
 
     }
+    public async  getUserByEmail(email : string) {
+        try {
+            const doc = await User.findOne({email: email}).exec()
+            return doc.toObject()
+        } catch (error) {
+            console.log(error)
+        }
+
+    }
     public async  getUsersByName(byName : string) {
         try {
             const doc = await User.find({userName: byName}).exec()
