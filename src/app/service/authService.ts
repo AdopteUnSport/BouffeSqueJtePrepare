@@ -45,6 +45,13 @@ import { RefreshTokenRepository } from '../repository/refreshTokenRepository';
       public createCookieRefresh(tokenData: TokenData) {
         return `refreshToken=${tokenData.token}; HttpOnly; Max-Age=${tokenData.expiresIn}`;
       }
+      public async logout(id : string, idRefresh : string) {
+        
+        await this.tokenRepository.deletetoken(id)
+        await this.refreshTokenRepository.deletetoken(idRefresh)
+
+        return "0"
+      }
 }
 
 export const authService= new AuthService()

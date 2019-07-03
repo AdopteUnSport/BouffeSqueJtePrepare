@@ -3,7 +3,9 @@ import { Request, Response } from 'express';
 import { userService } from '../service/userService';
 import { authService } from '../service/authService';
 import TokenData from '../interface/tokenData.model';
+import * as jwt from 'jsonwebtoken';
 import { IUser } from '../interface';
+import DataStoredInToken from '../interface/dataStoredInToken.model';
 
 var _ =require("lodash")
 
@@ -15,9 +17,9 @@ export class AuthController {
         user.password= undefined
 
         // a enlever pour faire la verification par mail
-        const tokenData = await authService.createToken(user);
+        /*const tokenData = await authService.createToken(user);
         const refreshToken = await authService.createRefreshToken(user);
-        res.setHeader('Set-Cookie', [authService.createCookie(tokenData),authService.createCookieRefresh(refreshToken)]);
+        res.setHeader('Set-Cookie', [authService.createCookie(tokenData),authService.createCookieRefresh(refreshToken)]);*/
         res.send(user);
     }
     public async login(req: Request, res: Response) {
@@ -34,7 +36,10 @@ export class AuthController {
     }
     public async logout(req: Request, res: Response) {
         // mettre en place norme JWT ici suppression du token enregistrer en db$*
-        
+        const cookies = req.cookies;
+        const auth = jwt.verify(cookies.Authorization, "secret") as DataStoredInToken;
+        const refresh = jwt.verify(cookies.refreshToken, "secret") as DataStoredInToken;
+        await authService.logout(auth._id,refresh._id)
         res.json("disconnected")
     }
   

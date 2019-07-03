@@ -9,7 +9,7 @@ import mongoose = require("mongoose");
 const MONGODB_CONNECTION: string = "mongodb://localhost:27017/testBd";
 mongoose.connect(MONGODB_CONNECTION, { useNewUrlParser: true });
 
-describe.only('user Service', () => {
+describe('user Service', () => {
   after(function () {
     mongoose.connection.db.dropDatabase()
   })

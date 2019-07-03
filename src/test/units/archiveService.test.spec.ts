@@ -13,7 +13,7 @@ mongoose.connect(MONGODB_CONNECTION, { useNewUrlParser: true });
 
 describe.only('archive Service', () => {
   after(function () {
-    mongoose.connection.db.dropCollection("archive")
+    mongoose.connection.db.dropCollection("archives")
   })
 
 
@@ -60,14 +60,14 @@ describe.only('archive Service', () => {
           userId: "1"
         }
       } as Request
-      const result = await archiveService.getArchive(req)
+      const result = await archiveService.getArchiveByUserId(req)
       expect(result).to.haveOwnProperty("userId").to.be.equal("1")
     });
     it('should return array of user s fridge', async () => {
-      const user  = await archiveService.getAllArchive()
+    
       const req = {
         params : {
-          userId: user[0]._id
+          userId:1
         }
       } as Request
       const result = await archiveService.getListeIngredient(req)

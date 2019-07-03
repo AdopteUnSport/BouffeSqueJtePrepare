@@ -12,7 +12,7 @@ import DataStoredInToken from '../../app/interface/dataStoredInToken.model';
 const MONGODB_CONNECTION: string = "mongodb://localhost:27017/testBd";
 mongoose.connect(MONGODB_CONNECTION, { useNewUrlParser: true });
 
-describe.only('auth Service', () => {
+describe('auth Service', () => {
   after(function () {
     mongoose.connection.db.dropCollection("user")
   })
