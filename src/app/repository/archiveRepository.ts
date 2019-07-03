@@ -9,10 +9,10 @@ const Archive = mongoose.model('Archive', archiveSchema);
 export class ArchiveRepository{
 
 
-public addNewArchive (archiveNew:IArchive) {     
+public async addNewArchive (archiveNew:IArchive) {     
     try {
         const archiveNewToAdd = new Archive(archiveNew)
-        archiveNewToAdd.save()
+       await archiveNewToAdd.save()
     return archiveNewToAdd
     } catch (error) {
         
@@ -35,6 +35,16 @@ public addNewArchive (archiveNew:IArchive) {
     public async  getArchiveById(id : string) {
         try {
             const doc = await Archive.findById(id)
+        return doc.toObject()
+        } catch (error) {
+            console.log(error)
+        }
+        
+    }
+    public async  getArchiveByUserId(id : string) {
+        try {
+            console.log("PATAE"+id)
+            const doc = await Archive.findOne({userId:id})
         return doc.toObject()
         } catch (error) {
             console.log(error)

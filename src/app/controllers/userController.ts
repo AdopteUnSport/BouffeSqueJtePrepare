@@ -1,11 +1,21 @@
 
 import { Request, Response } from 'express';
+import * as express from 'express';
 import { userService } from '../service/userService';
+import authMiddleware from '../middlewares/auth.middleware';
 var _ =require("lodash")
 
 
 export class UserController {
+   /* public path = '/user';
+    public router = express.Router();
+    constructor() {
+        this.initializeRoutes();
+    }
+    private initializeRoutes() {
+        this.router.get(`${this.path}`,authMiddleware ,this.getAllUser);
 
+    }*/
     public async getAllUser(req: Request, res: Response) {
         const user =  await userService.getAllUser()
         
@@ -42,22 +52,6 @@ export class UserController {
 
         res.json(await userService.deleteListeIngredient(req))
     }
-    public async addNewContact(req: Request, res: Response) {
-
-        res.json(await userService.addNewContact(req))
-    }
-    public async login(req: Request, res: Response) {
-        // mettre en place norme JWT a voir si on utilise 2 serveurs
-        const user = await userService.login(req)
-        if(_.isNil(user)){
-            res.status(400).json("Erreur dans l'authentification ")
-        }
-        res.json(user)
-    }
-    public async logout(req: Request, res: Response) {
-        // mettre en place norme JWT ici suppression du token enregistrer en db$*
-        
-        res.json("disconnected")
-    }
+   
 
 }
