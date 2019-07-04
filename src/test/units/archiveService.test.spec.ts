@@ -11,7 +11,7 @@ import { IArchive, IIngredient } from '../../app/interface';
 const MONGODB_CONNECTION: string = "mongodb://localhost:27017/testBd";
 mongoose.connect(MONGODB_CONNECTION, { useNewUrlParser: true });
 
-describe.only('archive Service', () => {
+describe('archive Service', () => {
   after(function () {
     mongoose.connection.db.dropCollection("archives")
   })

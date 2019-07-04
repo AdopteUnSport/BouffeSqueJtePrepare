@@ -7,35 +7,36 @@ import { archiveService } from '../service/archiveService';
 export class ArchiveController {
 
     public getAllArchive(req: Request, res: Response) {
+        res.status(200)
         res.json(archiveService.getAllArchive())
     }
     public getArchive(req: Request, res: Response) {
-
+        res.status(200)
         res.json(archiveService.getArchive(req))
     }
     public updateArchive(req: Request, res: Response) {
        
-
+        res.status(202)
         res.json(archiveService.updateArchive(req))
     }
     public deleteArchive(req: Request, res: Response) {
-       
+        res.status(202)
         res.json(archiveService.deleteArchive(req))
     }
     public getListeIngredient(req: Request, res: Response) {
         
-
+        res.status(200)
         res.json(archiveService.getListeIngredient(req))
     }
     
     public updateListeIngredient(req: Request, res: Response) {
        
-
+        res.status(202)
         res.json(archiveService.updateListeIngredient(req))
     }
     public addArchive(req: Request, res: Response) {
        
-
+        res.status(201)
         res.json(archiveService.addArchive(req))
     }
     

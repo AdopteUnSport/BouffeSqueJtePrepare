@@ -26,8 +26,10 @@ export class AuthController {
             /*const tokenData = await authService.createToken(user);
             const refreshToken = await authService.createRefreshToken(user);
             res.setHeader('Set-Cookie', [authService.createCookie(tokenData),authService.createCookieRefresh(refreshToken)]);*/
+            res.status(201)
             res.send(user);
         }
+        res.status(400)
         res.send(new Error("email already exist"));
     }
     public async login(req: Request, res: Response) {
@@ -40,6 +42,7 @@ export class AuthController {
         const tokenData = await authService.createToken(user);
         const refreshToken = await authService.createRefreshToken(user);
         res.setHeader('Set-Cookie', [authService.createCookie(tokenData),authService.createCookieRefresh(refreshToken)]);
+        res.status(202)
         res.send(user);
     }
     public async logout(req: Request, res: Response) {
@@ -48,6 +51,7 @@ export class AuthController {
         const auth = jwt.verify(cookies.Authorization, "secret") as DataStoredInToken;
         const refresh = jwt.verify(cookies.refreshToken, "secret") as DataStoredInToken;
         await authService.logout(auth._id,refresh._id)
+        res.status(200)
         res.json("disconnected")
     }
   
