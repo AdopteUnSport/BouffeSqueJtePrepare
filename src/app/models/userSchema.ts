@@ -7,7 +7,8 @@ var Schema = mongoose.Schema;
 export const userSchema = new Schema({
   userName:  {
     type:String,
-    required : true
+    required : true,
+    minlength : 6
 },
   firstName:  {
     type:String
@@ -17,11 +18,13 @@ export const userSchema = new Schema({
 },
   email:  {
     type:String,
-    required : true
+    required : true,
+    match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Please fill a valid email address']
 },
   password:  {
     type:String,
-    required : true
+    required : true,
+    minlength : 6
 },
   phone:  String,
   fridge: [ingredientSchema]
