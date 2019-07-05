@@ -32,7 +32,7 @@ describe('user Service', () => {
     it('should return array of length 1', async () => {
       const reqPost = {
         body: {
-          userName: "test",
+          userName: "testtttttt",
           fridge: [{
             status: "fresh",
             quantity: "0",
@@ -43,8 +43,8 @@ describe('user Service', () => {
           }],
           firstName: "test",
           lastName: "test",
-          email: "test",
-          password: "test",
+          email: "test@test.fr",
+          password: "testtttttt",
          
         }
 
@@ -64,7 +64,7 @@ describe('user Service', () => {
         }
       } as Request
       const result = await userService.getUser(req)
-      expect(result).to.haveOwnProperty("userName").to.be.equal("test")
+      expect(result).to.haveOwnProperty("userName").to.be.equal("testtttttt")
     });
     it('should return array of user s fridge', async () => {
       const user  = await userService.getAllUser()

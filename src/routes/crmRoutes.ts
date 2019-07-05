@@ -11,52 +11,52 @@ export class Routes {
     public recipeController : RecipeController = new RecipeController()
     public archiveController : ArchiveController = new ArchiveController()
     public routes(app : express.Application): void {  
-        app.route('/').get(this.recipeController.test) 
-        app.route('/recipe') 
+        app.route('/api').get(this.recipeController.test) 
+        app.route('/api/recipe') 
         // GET endpoint 
         .get(this.recipeController.getRecipe)        
         // POST endpoint
         .post(authMiddleware,this.recipeController.addNewRecipe)
 
         // Contact detail
-        app.route('/recipe/:recipeId')
+        app.route('/api/recipe/:recipeId')
         // get specific contact
         .get(this.recipeController.getRecipeById)
         .put(authMiddleware,this.recipeController.updateRecipe)
         .delete(authMiddleware,this.recipeController.deleteRecipe)
         // Contact 
-        app.route('/user')
+        app.route('/api/user')
         // GET endpoint 
         .get(authMiddleware,this.userController.getAllUser)      
         // POST endpoint
         .post(this.authController.addNewContact)
-        app.route('/user/login') 
+        app.route('/api/user/login') 
         
         // POST endpoint
         .post(this.authController.login)
-        app.route('/user/logout') 
+        app.route('/api/user/logout') 
         
         // POST endpoint
         .post(authMiddleware,this.authController.logout)
         // Contact detail
-        app.route('/user/:userId')
+        app.route('/api/user/:userId')
         // get specific contact
         .get(authMiddleware,this.userController.getUser)
         .put(authMiddleware,this.userController.updateUser)
         .delete(authMiddleware,this.userController.deleteUser)
-        app.route('/user/:userId/ingredients')
+        app.route('/api/user/:userId/ingredients')
         // get specific contact
         .get(authMiddleware,this.userController.getListeIngredient)
         .post(authMiddleware,this.userController.addIngredient)
         .put(authMiddleware,this.userController.updateListeIngredient)
         .delete(authMiddleware,this.userController.deleteListeIngredient)
-        app.route('/archive') 
+        app.route('/api/archive') 
         // GET endpoint 
         .get(authMiddleware,this.archiveController.getAllArchive)        
         // POST endpoint
         .post(authMiddleware,this.archiveController.addArchive)
 
-        app.route('/user/:userId/archive')
+        app.route('/api/user/:userId/archive')
         // get specific contact
         .get(authMiddleware,this.archiveController.getArchive)
         .put(authMiddleware,this.archiveController.updateArchive)
