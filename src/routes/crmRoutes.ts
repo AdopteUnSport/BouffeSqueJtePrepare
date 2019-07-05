@@ -33,11 +33,11 @@ export class Routes {
         app.route('/api/user/login') 
         
         // POST endpoint
-        .post(this.authController.login)
+        .get(this.authController.login)
         app.route('/api/user/logout') 
         
         // POST endpoint
-        .post(authMiddleware,this.authController.logout)
+        .get(authMiddleware,this.authController.logout)
         // Contact detail
         app.route('/api/user/:userId')
         // get specific contact

@@ -18,7 +18,7 @@ export class AuthController {
         const userExist = await userService.getUserByEmail(req)
         console.log("PATAE"+JSON.stringify(userExist))
         if(isNullOrUndefined(userExist)){
-            console.log("Dieumi")
+        
             const user : IUser= await userService.addNewContact(req)
             user.password= undefined
     
@@ -34,6 +34,7 @@ export class AuthController {
     }
     public async login(req: Request, res: Response) {
         // mettre en place norme JWT a voir si on utilise 2 serveurs
+        console.log("Dieumichauve"+JSON.stringify(req.query))
         const user = await userService.login(req)
         if(_.isNil(user)){
             res.status(400).json("Erreur dans l'authentification ")

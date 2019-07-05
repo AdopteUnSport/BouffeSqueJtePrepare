@@ -17,10 +17,11 @@ import { IUser, IIngredient } from '../interface';
     }
     public async login(req: Request) {
      
-        const users :IUser[] =await  this.userRepository.getUsersByName(req.body.userName)
+        const users :IUser[] =await  this.userRepository.getUsersByName(req.query.userName)
         let res  ;
+        console.log(JSON.stringify(users))
         for(var user of users){
-            if(user.userName===req.body.userName && user.password===req.body.password){
+            if(user.userName===req.query.userName && user.password===req.query.password){
                 res = user;
                 
                 break;

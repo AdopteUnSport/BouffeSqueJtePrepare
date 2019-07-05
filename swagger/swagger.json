@@ -403,7 +403,7 @@
 				],
 				"parameters": [
 					{
-						"name": "userId",
+						"name": "userName",
 						"in": "query",
 						"description": "The user name for login",
 						"required": true,

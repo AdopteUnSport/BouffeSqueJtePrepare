@@ -51,6 +51,7 @@ public async  addNewUser (userNew:IUser) {
     }
     public async  getUsersByName(byName : string) {
         try {
+            console.log("PATATE"+byName)
             const doc = await User.find({userName: byName}).exec()
             console.log(JSON.stringify(doc))
             const res =[]
