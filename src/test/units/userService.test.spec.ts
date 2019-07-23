@@ -45,7 +45,7 @@ describe('user Service', () => {
           lastName: "test",
           email: "test@test.fr",
           password: "testtttttt",
-         
+         shoppingList: []
         }
 
       } as Request

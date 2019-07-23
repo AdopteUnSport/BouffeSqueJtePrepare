@@ -7,20 +7,12 @@ var _ =require("lodash")
 
 
 export class UserController {
-   /* public path = '/user';
-    public router = express.Router();
-    constructor() {
-        this.initializeRoutes();
-    }
-    private initializeRoutes() {
-        this.router.get(`${this.path}`,authMiddleware ,this.getAllUser);
-
-    }*/
     public async getAllUser(req: Request, res: Response) {
         const user =  await userService.getAllUser()
         res.status(200)
         res.json(user)
     }
+
     public async getUser(req: Request, res: Response) {
         res.status(200)
         res.json(await userService.getUser(req))
@@ -39,6 +31,7 @@ export class UserController {
         res.status(200)
         res.json(await userService.getListeIngredient(req))
     }
+  
     public async addIngredient(req: Request, res: Response) {
         res.status(201)
         res.json(await userService.addIngredient(req))
@@ -52,6 +45,28 @@ export class UserController {
         res.status(202)
         res.json(await userService.deleteListeIngredient(req))
     }
-   
+    public async getAllShoppingList(req: Request, res: Response) {
+        const user =  await userService.getAllShoppingList(req)
+        res.status(200)
+        res.json(user)
+    }
+    public async getShoppingListById(req: Request, res: Response) {
+
+        res.status(200)
+        res.json(await userService.getShoppingListById(req))
+    }
+    public async addIngredientInShoppingList(req: Request, res: Response) {
+        res.status(201)
+        res.json(await userService.addIngredientInShoppingList(req))
+    }
+    public async updateListeIngredientInShoppingList(req: Request, res: Response) {
+
+        res.status(202)
+        res.json(await userService.updateListeIngredientInShoppingList(req))
+    }
+    public async deleteListeIngredientInShoppingList(req: Request, res: Response) {
+        res.status(202)
+        res.json(await userService.deleteListeIngredientInShoppingList(req))
+    }
 
 }

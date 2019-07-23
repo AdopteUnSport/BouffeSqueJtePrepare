@@ -2,13 +2,14 @@
 import { UserRepository } from "../repository/userRepository";
 import { Request } from 'express';
 import { IUser, IIngredient } from '../interface';
+import { ShoppingList } from "../interface/shoppingList.model";
 
  class UserService{
     private userRepository = new UserRepository()
     public async addNewContact (req: Request) {
         const newUser = req.body as IUser
         const res = await this.userRepository.addNewUser(newUser);
-        console.log("PATAE"+JSON.stringify(res))
+     
         return res;
     }
     public async getAllUser() {
@@ -31,12 +32,12 @@ import { IUser, IIngredient } from '../interface';
         return res;
     }
     public async getUser(req: Request) {
-        console.log(JSON.stringify(this))
+      
 
         return this.userRepository.getUser(req.params.userId)
     }
     public async getUserByEmail(req: Request) {
-        console.log(JSON.stringify(this))
+   
 
         return this.userRepository.getUserByEmail(req.body.email)
     }
@@ -70,6 +71,42 @@ import { IUser, IIngredient } from '../interface';
 
         const user :IUser =await this.userRepository.getUser(req.params.userId)
         user.fridge=[];
+        return  await this.userRepository.updateUser(user._id,user)
+    }
+    public async getAllShoppingList(req: Request) {
+       
+        const res = await this.userRepository.getUser(req.params.userId)
+
+        return  res.shoppingList
+    }
+    public async getShoppingListById(req: Request) {
+       
+        const res : IUser = await this.userRepository.getUser(req.params.userId)
+        const goodShoppingList = res.shoppingList.find(x=>x._id===req.params.shoppingListId)
+        return goodShoppingList
+    }
+    public async addShoppingList(req: Request) {
+        const newIngredients : ShoppingList = req.body as ShoppingList
+        const user :IUser =await this.userRepository.getUser(req.params.userId)
+        user.shoppingList.push(newIngredients);
+        return  await this.userRepository.updateUser(user._id,user)
+    }
+    public async addIngredientInShoppingList(req: Request) {
+        const newIngredient : IIngredient = req.body as IIngredient
+        const user :IUser =await this.userRepository.getUser(req.params.userId)
+        user.shoppingList.find(x=>x._id===req.params.shoppingListId).shoppingList.push(newIngredient)
+       return this.userRepository.updateUser(user._id,user)
+    }
+    public async updateListeIngredientInShoppingList(req: Request) {
+        const newIngredients : IIngredient[] = req.body as IIngredient[]
+        const user :IUser =await this.userRepository.getUser(req.params.userId)
+        user.shoppingList.find(x=>x._id===req.params.shoppingListId).shoppingList=newIngredients;
+        return  await this.userRepository.updateUser(user._id,user)
+    }
+    public async deleteListeIngredientInShoppingList(req: Request) {
+
+        const user :IUser =await this.userRepository.getUser(req.params.userId)
+        user.shoppingList.find(x=>x._id===req.params.shoppingListId).shoppingList=[]
         return  await this.userRepository.updateUser(user._id,user)
     }
 }

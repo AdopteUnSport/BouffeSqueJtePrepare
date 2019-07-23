@@ -29,7 +29,8 @@ describe('auth Service', () => {
         lastName: "test",
         phone:"000000",
         userName:"test",
-        password:"test"
+        password:"test",
+        shoppingList: []
       }
       const result = await authService.createToken(user)
       const verificationResponse = jwt.verify(result.token, "secret") as DataStoredInToken;
@@ -44,7 +45,8 @@ describe('auth Service', () => {
         lastName: "test",
         phone:"000000",
         userName:"test",
-        password:"test"
+        password:"test",
+        shoppingList: []
       }
       const result = await authService.createRefreshToken(user)
       const verificationResponse = jwt.verify(result.token, "secret") as DataStoredInToken;
@@ -63,7 +65,8 @@ describe('auth Service', () => {
         lastName: "test",
         phone:"000000",
         userName:"test",
-        password:"test"
+        password:"test",shoppingList: []
+
       }
       const result = await authService.createRefreshToken(user)
       const cookie = await authService.createCookie(result)
@@ -78,7 +81,7 @@ describe('auth Service', () => {
         lastName: "test",
         phone:"000000",
         userName:"test",
-        password:"test"
+        password:"test",shoppingList: []
       }
       const result = await authService.createRefreshToken(user)
       const cookie = await authService.createCookieRefresh(result)

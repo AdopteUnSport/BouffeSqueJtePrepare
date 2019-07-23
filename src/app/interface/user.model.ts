@@ -1,4 +1,5 @@
 import { IIngredient } from './ingredient.model';
+import { ShoppingList } from './shoppingList.model';
 
 export interface IUser {
     _id: string;
@@ -9,5 +10,6 @@ export interface IUser {
     password: string;
     phone: string;
     fridge: Array<IIngredient>;
+    shoppingList : Array<ShoppingList>
 }
 

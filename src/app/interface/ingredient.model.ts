@@ -7,6 +7,5 @@ export interface IIngredient {
     category: ICategory;
     name: string;
     quantity : number;
-    photoUrls: Array<string>;
     tags: Array<string>;
 }
