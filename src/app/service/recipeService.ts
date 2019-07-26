@@ -5,9 +5,8 @@ import { RecipeRepository, IRecipeParametter } from "../repository/recipeReposit
 
 class RecipeService{
     private recipeRepository = new RecipeRepository()
-    public async addNewRecipe (req: Request) {  
-        const newRecipe = req.body as IRecipe     
-        const res = await this.recipeRepository.addNewRecipe(newRecipe)
+    public async addNewRecipe ( recipe: IRecipe) {  
+        const res = await this.recipeRepository.addNewRecipe(recipe)
               
         return res
     }
