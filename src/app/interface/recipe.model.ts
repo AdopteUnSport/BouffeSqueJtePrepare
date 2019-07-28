@@ -7,6 +7,6 @@ export interface IRecipe {
     name:string;
     description: string;
     listIngredient: Array<IIngredient>;
-    photo : [string];
+    photo : Array<String>
     
 }

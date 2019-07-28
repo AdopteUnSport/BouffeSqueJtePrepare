@@ -19,6 +19,7 @@ export class RecipeController{
  
         res.status(201)
         const recipe= req.body as IRecipe
+        recipe.photo = []
         const files = req.files.file as UploadedFile[]
         console.log(files)
         await files.forEach(async element => {
@@ -26,6 +27,7 @@ export class RecipeController{
                 name :element.name
             } as IImage
             const res = await imageService.addImage(image)
+            fs.writeFileSync("upload/"+res._id+"/"+res.name,element.data)
             recipe.photo.push(res._id)
         })
         
