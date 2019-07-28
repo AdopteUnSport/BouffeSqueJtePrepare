@@ -22,14 +22,15 @@ export class RecipeController{
         recipe.photo = []
         const files = req.files.file as UploadedFile[]
         console.log(files)
-        await files.forEach(async element => {
+        for(let i =0;i<files.length;i++) {
             const image = {
-                name :element.name
+                name :files[i].name
             } as IImage
             const res = await imageService.addImage(image)
-            fs.writeFileSync("upload/"+res._id+"/"+res.name,element.data)
-            recipe.photo.push(res._id)
-        })
+            fs.writeFileSync("upload/"+res._id+"/"+res.name,files[i].data)
+            recipe.photo.push("http://51.83.70.42:3000/api/images/"+res._id)
+            console.log("PATATA"+JSON.stringify(recipe))
+        }
         
         res.json(await recipeService.addNewRecipe(recipe))
     }

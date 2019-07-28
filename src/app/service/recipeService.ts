@@ -6,6 +6,7 @@ import { RecipeRepository, IRecipeParametter } from "../repository/recipeReposit
 class RecipeService{
     private recipeRepository = new RecipeRepository()
     public async addNewRecipe ( recipe: IRecipe) {  
+        console.log("PATATA"+JSON.stringify(recipe))
         const res = await this.recipeRepository.addNewRecipe(recipe)
               
         return res
