@@ -18,12 +18,16 @@ export class ImageController {
         res.status(200)
         res.json(imageService.getImage(req.params.id))
     }
-    public async getImageById(req: Request, res: Response) {
-       
+    public async getImageById(req: Request, res: Response) {    
         const id = req.params.imageId
         const image = await imageService.getImage(id)
         res.status(200)
         res.sendFile(process.cwd()+"/upload/"+id+"/"+image.name)
+    }
+    public async getImageByTags(req: Request, res: Response) {
+        const image :IImage = await imageService.getImageByTags(req)
+        res.status(200)
+        res.sendFile(process.cwd()+"/upload/"+image._id+"/"+image.name)
     }
     public async addImage(req: Request, res: Response) {
         console.log(req.body)

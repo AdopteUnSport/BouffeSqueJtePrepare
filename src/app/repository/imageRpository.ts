@@ -1,11 +1,13 @@
 import * as mongoose from 'mongoose';
 
 import { IImage } from '../interface';
-import ImageSchema from '../models/imageSchema';
+import ImageSchema, { imageSchema } from '../models/imageSchema';
 
 
 const Image = mongoose.model('Image', ImageSchema);
-
+export interface IImagesParametter{
+    text: String
+}
 export class ImageRepository{
 
 
@@ -46,10 +48,24 @@ public async addNewImage (ImageNew:IImage) : Promise<IImage>{
         }
         
     }
-    public async  getImageByName(id : string) {
-        try {
-            const doc = await Image.findById(id)
-        return doc.toObject()
+    public async  getImageByTags(params : IImagesParametter) {
+        try {  
+        const doc = await Image.find({$text:{$search:params.text}})
+        const score =[]
+        let res =0
+        for(let i =0; i<doc.length;i++){
+            res=0;
+            const img : IImage=doc[i].toObject()
+            for(let y=0;y<params.text.length;y++){
+                if(img.tags.find(x=>x.includes(params.text[y]))){
+                    res++
+                }
+            }
+            score[i]=res;
+        }
+        console.log(score.indexOf(Math.max.apply(Math,score)))
+        const t= score.indexOf(Math.max.apply(Math,score))
+        return doc[t].toObject()
         } catch (error) {
             console.log(error)
         }
