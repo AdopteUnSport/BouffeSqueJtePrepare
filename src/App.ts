@@ -10,7 +10,7 @@ class App {
 
   public app: express.Application;
   public routePrv: Routes = new Routes();
-  public mongoUrl: string = 'mongodb://localhost/Bouffe';
+  public mongoUrl: string = 'mongodb://localhost/bouffe';
   constructor() {
       this.app = express();
       const options:cors.CorsOptions = {

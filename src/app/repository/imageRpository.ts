@@ -15,9 +15,9 @@ public async addNewImage (ImageNew:IImage) : Promise<IImage>{
     try {
        
         const ImageNewToAdd = new Image(ImageNew)
-       
+        console.log(JSON.stringify(ImageNewToAdd))
         const imageSaved = await ImageNewToAdd.save()
-        
+        console.log(JSON.stringify(imageSaved))
     return  imageSaved.toObject()
     } catch (error) {
         

@@ -26,8 +26,15 @@ export class ImageController {
     }
     public async getImageByTags(req: Request, res: Response) {
         const image :IImage = await imageService.getImageByTags(req)
-        res.status(200)
-        res.sendFile(process.cwd()+"/upload/"+image._id+"/"+image.name)
+        console.log(JSON.stringify(image))
+        if(image._id){
+            res.status(200)
+            res.sendFile(process.cwd()+"/upload/"+image._id+"/"+image.name)
+        }else{
+            res.status(404)
+            res.json('FileNotFound')
+        }
+       
     }
     public async addImage(req: Request, res: Response) {
         console.log(req.body)

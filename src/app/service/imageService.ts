@@ -4,10 +4,18 @@ import { Request } from 'express';
 import { IImage, IIngredient } from '../interface';
 import * as fs from "fs"
 import { IRecipeParametter } from "../repository/recipeRepository";
+import { isNullOrUndefined, isArray } from "util";
+const elasticSearch = require('elasticsearch')
  class ImageService{
     private imageRepository = new ImageRepository()
+    private client = new elasticSearch.Client({
+        host : 'localhost:9200',
+        apiVersion:"5.6",
+        log:'trace'
+    })
     public async addImage (image: IImage) : Promise<IImage> {  
         const imageSaved=  await this.imageRepository.addNewImage(image)
+        console.log("tessst")
         fs.mkdirSync("upload/"+imageSaved._id)
         return imageSaved
     }
@@ -25,7 +33,43 @@ import { IRecipeParametter } from "../repository/recipeRepository";
             text: req.query.tags ? req.query.tags : null
     
         } as  IRecipeParametter    
-        return await this.imageRepository.getImageByTags(params)
+        let response;
+       
+        if(!isArray(params.text)){
+             response = await this.client.search({
+                index:"bouffe",
+                type:"images",
+                body : {
+                    query: {
+                        match :{
+                            tags : params.text
+                        }
+                    }
+                }
+            })    
+        }else{
+             response = await this.client.search({
+                index:"bouffe",
+                type:"images",
+                body : {
+                    query: {
+                        terms :{
+                            tags : params.text
+                        }
+                    }
+                }
+            })    
+        }
+       
+        console.log(JSON.stringify(response.hits.hits[0]))
+        if(response.hits.hits[0]){
+            const img =  {
+                _id :response.hits.hits[0]._id,
+                name : response.hits.hits[0]._source.name
+            } as IImage
+            return  img
+        }
+       return null
     }
     public async updateImage(req: Request) {
         const updatedImage = req.body as IImage
