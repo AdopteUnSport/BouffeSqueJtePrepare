@@ -13,7 +13,7 @@ mongoose.connect(MONGODB_CONNECTION, { useNewUrlParser: true });
 
 describe('archive Service', () => {
   after(function () {
-    mongoose.connection.db.dropCollection("archives")
+    mongoose.connection.db.dropCollection('archive')
   })
 
 
@@ -36,7 +36,6 @@ describe('archive Service', () => {
               id:"1",
               name:"test"
             },
-            photoUrls: ["test"],
             name: "oeuf",
             tags: ["test"]
           } as IIngredient

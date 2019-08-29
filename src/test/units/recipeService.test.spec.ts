@@ -11,7 +11,7 @@ mongoose.connect(MONGODB_CONNECTION, { useNewUrlParser: true });
 
 describe('recipe Service', () => {
   after(function () {
-    mongoose.connection.db.dropDatabase()
+   // mongoose.connection.db.dropCollection('recipes')
   })
 
 
@@ -54,7 +54,7 @@ describe('recipe Service', () => {
           listeIngredient: []
         }
       } as Request
-      await recipeService.addNewRecipe(reqPost)
+      await recipeService.addNewRecipe(reqPost.body)
       const result = await recipeService.getRecipe(req)
       expect(result).to.be.an("array").of.lengthOf(1)
     });
@@ -83,7 +83,7 @@ describe('recipe Service', () => {
           listeIngredient: []
         }
       } as Request
-      await recipeService.addNewRecipe(reqPost)
+      await recipeService.addNewRecipe(reqPost.body)
       const result = await recipeService.getRecipe(req)
       expect(result).to.be.an("array").of.lengthOf(1)
     });
@@ -112,7 +112,7 @@ describe('recipe Service', () => {
           listeIngredient: []
         }
       } as Request
-      await recipeService.addNewRecipe(reqPost)
+      await recipeService.addNewRecipe(reqPost.body)
       const result = await recipeService.getRecipe(req)
       expect(result).to.be.an("array").of.lengthOf(2)
     });
@@ -149,7 +149,7 @@ describe('recipe Service', () => {
 
       } as Request
      
-      const result = await recipeService.addNewRecipe(reqPost)
+      const result = await recipeService.addNewRecipe(reqPost.body)
       const id = result._id
      
       result.name = "saucebbq"
