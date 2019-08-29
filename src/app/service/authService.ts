@@ -40,6 +40,7 @@ import { RefreshTokenRepository } from '../repository/refreshTokenRepository';
         };
       }
       public createCookie(tokenData: TokenData) {
+        console.log(`Authorization=${tokenData.token}; HttpOnly; Max-Age=${tokenData.expiresIn}`)
         return `Authorization=${tokenData.token}; HttpOnly; Max-Age=${tokenData.expiresIn}`;
       }
       public createCookieRefresh(tokenData: TokenData) {

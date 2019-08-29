@@ -15,10 +15,6 @@ var ingredientSchema = new Schema({
         type:String,
         required : true
     },
-    photoUrls: {
-        type:[String],
-        required : true
-    },
     tags: [String]
    
   

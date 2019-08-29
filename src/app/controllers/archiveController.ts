@@ -6,38 +6,39 @@ import { archiveService } from '../service/archiveService';
 
 export class ArchiveController {
 
-    public getAllArchive(req: Request, res: Response) {
+    public async getAllArchive(req: Request, res: Response) {
         res.status(200)
-        res.json(archiveService.getAllArchive())
+        res.json(await archiveService.getAllArchive())
     }
-    public getArchive(req: Request, res: Response) {
+    public async getArchive(req: Request, res: Response) {
         res.status(200)
-        res.json(archiveService.getArchive(req))
+        res.json(await archiveService.getAllArchive())
+         res.json(archiveService.getArchive(req))
     }
-    public updateArchive(req: Request, res: Response) {
+    public async updateArchive(req: Request, res: Response) {
        
         res.status(202)
-        res.json(archiveService.updateArchive(req))
+        res.json(await archiveService.updateArchive(req))
     }
-    public deleteArchive(req: Request, res: Response) {
+    public async deleteArchive(req: Request, res: Response) {
         res.status(202)
-        res.json(archiveService.deleteArchive(req))
+        res.json(await archiveService.deleteArchive(req))
     }
-    public getListeIngredient(req: Request, res: Response) {
+    public async getListeIngredient(req: Request, res: Response) {
         
         res.status(200)
-        res.json(archiveService.getListeIngredient(req))
+        res.json(await archiveService.getListeIngredient(req))
     }
     
-    public updateListeIngredient(req: Request, res: Response) {
+    public async updateListeIngredient(req: Request, res: Response) {
        
         res.status(202)
-        res.json(archiveService.updateListeIngredient(req))
+        res.json(await archiveService.updateListeIngredient(req))
     }
-    public addArchive(req: Request, res: Response) {
+    public async addArchive(req: Request, res: Response) {
        
         res.status(201)
-        res.json(archiveService.addArchive(req))
+        res.json(await archiveService.addArchive(req))
     }
     
 

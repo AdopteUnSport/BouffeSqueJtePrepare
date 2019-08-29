@@ -5,11 +5,12 @@ import * as cors from "cors";
 import * as bodyParser from "body-parser";
 import { Routes } from "./routes/crmRoutes";
 import * as mongoose from "mongoose"
+import * as fileUpload from "express-fileupload"
 class App {
 
   public app: express.Application;
   public routePrv: Routes = new Routes();
-  public mongoUrl: string = 'mongodb://localhost/Bouffe';
+  public mongoUrl: string = 'mongodb://localhost/bouffe';
   constructor() {
       this.app = express();
       const options:cors.CorsOptions = {
@@ -34,6 +35,7 @@ class App {
       this.app.use( '/api-docs/swagger/assets', express.static( 'node_modules/swagger-ui-dist' ) );
       this.app.use(bodyParser.json());
       this.app.use(bodyParser.urlencoded({ extended: false }));
+      this.app.use(fileUpload())
       this.app.use(cookieParser());
   }
   private mongoSetup(): void{

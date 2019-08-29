@@ -17,8 +17,10 @@ var recipeSchema = new Schema({
         type:[String],
         required : true
     },
-  
-  
+    photo : {
+        type : [String],
+        required:false
+    }
 });
 recipeSchema.index({"name" : "text","description" : "text","tags" : "text", "listIngredient.name":"text"})
 export default recipeSchema

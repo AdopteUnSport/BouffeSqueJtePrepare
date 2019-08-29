@@ -2,6 +2,7 @@
 
 import ingredientSchema from './ingredientSchema';
 import * as mongoose from 'mongoose';
+import { shoppingListSchema } from './shoppingListSchema';
 var Schema = mongoose.Schema;
 
 export const userSchema = new Schema({
@@ -27,7 +28,8 @@ export const userSchema = new Schema({
     minlength : 6
 },
   phone:  String,
-  fridge: [ingredientSchema]
+  fridge: [ingredientSchema],
+  shoppingList : [shoppingListSchema]
   
 });
 
