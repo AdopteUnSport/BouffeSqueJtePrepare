@@ -69,35 +69,6 @@ class RecipeService {
             body: {
                 min_score: 1,
                 query: JSON.parse(query)
-                /*{
-                     bool : {
-                         must :[{
-                         
-                             match : {
-                                 "listIngredient.name":params.listIngredient[0].name,
-                                 
-                                 }
-                             },
-                             {
-                                 terms : {
-                                 "listIngredient.tags":params.listIngredient[0].tags
-                                 }
-                             },
-                             {
-                                 range :{
-                                     "listIngredient.quantity":{
-                                         "lte":params.listIngredient[0].quantity
-                                         
-                                     }
-                                 }
-                             },
-                        
-                         ]
-                     }
-                  
-                }*/
-
-
             },
 
         })
