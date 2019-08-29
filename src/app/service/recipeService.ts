@@ -1,5 +1,5 @@
 
-import { Request } from 'express';
+import { Request, response } from 'express';
 import { IRecipe } from '../interface';
 import { RecipeRepository, IRecipeParametter } from "../repository/recipeRepository";
 const elasticSearch = require('elasticsearch')
@@ -75,13 +75,13 @@ class RecipeService {
 
 
         const recipeByIngredient = response.hits.hits
-        const recipeByIngredientCleaned : IRecipe[]= []
+      // params.listIngredient.
         recipeByIngredient.forEach(element => {
 
             for (let i = 0; i < element._source.listIngredient.length; i++) {
-
                 if (!params.listIngredient.find(x => x.name == element._source.listIngredient[i].name)) {
-                    console.log("index : " + recipeByIngredient.findIndex(x => (x._source.name == element._source.name)))
+
+                   
                     const index = recipeByIngredient.findIndex(x => (x._source.name == element._source.name))
                     delete recipeByIngredient[index]
                     console.log("deleted")
@@ -91,13 +91,21 @@ class RecipeService {
 
            
         });
-        recipeByIngredient.forEach(element => {
-            element._source._id=element._id;
-            recipeByIngredientCleaned.push(element._source)
-        });
-
+        const recipeByIngredientCleaned : IRecipe[] = this.cleanSearch(recipeByIngredient)
 
         return recipeByIngredientCleaned
+    }
+    public cleanSearch(eSresult:any){
+       //const hits=eSresult.hits.hits;
+       const cleanSearch :any[]= eSresult.map(element =>{
+        
+          return {
+            ...element._source,
+            "_id":element._id
+          } 
+        }).filter(x=> x!=null)
+        console.log(cleanSearch)
+       return cleanSearch
     }
     public async getRecipeById(req: Request) {
         const id = req.params.recipeId;

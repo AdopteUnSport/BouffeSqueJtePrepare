@@ -87,6 +87,29 @@ describe('recipe Service', () => {
       const result = await recipeService.getRecipe(req)
       expect(result).to.be.an("array").of.lengthOf(1)
     });
+    it.only('should clean ESSearch', () => {
+      const object: any = {
+        hits : {
+          hits : [
+            {
+              "_id":"1",
+              "_source":{
+                "test":"test",
+                "test2":"test2"
+              }
+            },{
+              "_id":"222222",
+              "_source":{
+                "test":"test3",
+                "test2":"test4"
+              }
+            }
+          ]
+        }
+      }
+      const result = recipeService.cleanSearch(object)
+      expect(result).to.be.an("array").of.lengthOf(1)
+    });
     it('should return array of searched recipe with multiple keyword', async () => {
       const reqPost = {
         body: {
