@@ -2,6 +2,7 @@
 import { Request, response } from 'express';
 import { IRecipe } from '../interface';
 import { RecipeRepository, IRecipeParametter } from "../repository/recipeRepository";
+import { isArray } from 'util';
 const elasticSearch = require('elasticsearch')
 class RecipeService {
     private recipeRepository = new RecipeRepository()
@@ -11,9 +12,9 @@ class RecipeService {
         log: 'trace'
     })
     public async addNewRecipe(recipe: IRecipe) {
-        console.log("PATATA" + JSON.stringify(recipe))
+       
         const res = await this.recipeRepository.addNewRecipe(recipe)
-
+        console.log("PATATA" + JSON.stringify(res))
         return res
     }
     public async updateRecipe(req: Request) {
@@ -37,7 +38,7 @@ class RecipeService {
 
             return await this.recipeRepository.getAll()
         } else if (params.text && !params.listIngredient) {
-            return await this.recipeRepository.getRecipeByText(params)
+           return await this.recipeRepository.getRecipeByText(params)
         }
 
         let query = '{"bool":{ "should" : ['
@@ -91,13 +92,18 @@ class RecipeService {
 
            
         });
-        const recipeByIngredientCleaned : IRecipe[] = this.cleanSearch(recipeByIngredient)
+        const recipeByIngredientCleaned : IRecipe[] = recipeByIngredient.map(element =>{
+            return {
+              ...element._source,
+              "_id":element._id
+            } 
+          }).filter(x=> x!=null)
 
         return recipeByIngredientCleaned
     }
     public cleanSearch(eSresult:any){
-       //const hits=eSresult.hits.hits;
-       const cleanSearch :any[]= eSresult.map(element =>{
+       const hits=eSresult.hits.hits;
+       const cleanSearch :any[]= hits.map(element =>{
         
           return {
             ...element._source,

@@ -11,7 +11,7 @@ mongoose.connect(MONGODB_CONNECTION, { useNewUrlParser: true });
 
 describe('recipe Service', () => {
   after(function () {
-   // mongoose.connection.db.dropCollection('recipes')
+    mongoose.connection.db.dropCollection('recipes')
   })
 
 
@@ -87,7 +87,7 @@ describe('recipe Service', () => {
       const result = await recipeService.getRecipe(req)
       expect(result).to.be.an("array").of.lengthOf(1)
     });
-    it.only('should clean ESSearch', () => {
+    it('should clean ESSearch', () => {
       const object: any = {
         hits : {
           hits : [
@@ -108,7 +108,7 @@ describe('recipe Service', () => {
         }
       }
       const result = recipeService.cleanSearch(object)
-      expect(result).to.be.an("array").of.lengthOf(1)
+      expect(result).to.be.an("array").of.lengthOf(2)
     });
     it('should return array of searched recipe with multiple keyword', async () => {
       const reqPost = {
