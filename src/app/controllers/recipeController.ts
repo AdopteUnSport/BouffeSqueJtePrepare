@@ -13,7 +13,7 @@ export class RecipeController{
 
     public async test(req: Request, res: Response) { 
  
-         
+         console.log("test")
         res.json("test")
        }
     public async addNewRecipe (req: Request, res: Response) { 
