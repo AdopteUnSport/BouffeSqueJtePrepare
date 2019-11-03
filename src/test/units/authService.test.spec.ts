@@ -35,7 +35,7 @@ describe('auth Service', () => {
       const result = await authService.createToken(user)
       const verificationResponse = jwt.verify(result.token, "secret") as DataStoredInToken;
       expect(verificationResponse._id).equal("1","should be 1")
-    });
+    }).timeout(5000);
     it('should return token with iduser 2 ', async () => {
       const user : IUser = {
         _id : "2",
@@ -70,7 +70,8 @@ describe('auth Service', () => {
       }
       const result = await authService.createRefreshToken(user)
       const cookie = await authService.createCookie(result)
-      expect(cookie).equal(`Authorization=${result.token}; HttpOnly; Max-Age=${result.expiresIn}`,"should be 3")
+
+      expect(cookie).equal(result,"should be 3")
     });
     it('should return correct string', async () => {
       const user : IUser = {

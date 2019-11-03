@@ -12,8 +12,6 @@ import { isArray } from 'util';
 export class RecipeController{
 
     public async test(req: Request, res: Response) { 
- 
-         console.log("test")
         res.json("test")
        }
     public async addNewRecipe (req: Request, res: Response) { 
@@ -28,7 +26,6 @@ export class RecipeController{
         recipe.photo = []
         if(isArray(req.files.file)){
             const files = req.files.file as UploadedFile[]
-            console.log(files)
             for(let i =0;i<files.length;i++) {
                 const image = {
                     name :files[i].name
@@ -36,7 +33,7 @@ export class RecipeController{
                 const res = await imageService.addImage(image)
                 fs.writeFileSync("upload/"+res._id+"/"+res.name,files[i].data)
                 recipe.photo.push("http://51.83.70.42:3000/api/images/"+res._id)
-                console.log("PATATA"+JSON.stringify(recipe))
+               
             }
         }else{
             const files = req.files.file as UploadedFile
@@ -46,7 +43,6 @@ export class RecipeController{
             const res = await imageService.addImage(image)
             fs.writeFileSync("upload/"+res._id+"/"+res.name,files.data)
             recipe.photo.push("http://51.83.70.42:3000/api/images/"+res._id)
-            console.log("PATATA"+JSON.stringify(recipe))
         }
       
         

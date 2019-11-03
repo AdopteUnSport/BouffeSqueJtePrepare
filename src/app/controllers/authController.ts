@@ -16,9 +16,7 @@ export class AuthController {
     public async addNewContact(req: Request, res: Response) {
         
         const userExist = await userService.getUserByEmail(req)
-        console.log("PATAE"+JSON.stringify(userExist))
         if(isNullOrUndefined(userExist)){
-        
             const user : IUser= await userService.addNewContact(req)
             user.password= undefined
     
@@ -34,7 +32,7 @@ export class AuthController {
     }
     public async login(req: Request, res: Response) {
         // mettre en place norme JWT a voir si on utilise 2 serveurs
-        console.log("Dieumichauve"+JSON.stringify(req.query))
+       
         const user = await userService.login(req)
         if(_.isNil(user)){
             res.status(400).json("Erreur dans l'authentification ")
@@ -42,7 +40,8 @@ export class AuthController {
         user.password = undefined;
         const tokenData = await authService.createToken(user);
         const refreshToken = await authService.createRefreshToken(user);
-        res.setHeader('Set-Cookie', [authService.createCookie(tokenData),authService.createCookieRefresh(refreshToken)]);
+        res.setHeader('Authorization',JSON.stringify(tokenData));
+        res.setHeader('refreshToken',JSON.stringify(refreshToken));
         res.status(202)
         res.send(user);
     }

@@ -11,7 +11,7 @@ export class ImageController {
     public async getAllImage(req: Request, res: Response) {
         res.status(200)
         const img = await imageService.getAllImage()
-        console.log(img)
+   
         res.json(img)
     }
     public getImageByName(req: Request, res: Response) {
@@ -26,7 +26,7 @@ export class ImageController {
     }
     public async getImageByTags(req: Request, res: Response) {
         const image :IImage = await imageService.getImageByTags(req)
-        console.log(JSON.stringify(image))
+     
         if(image._id){
             res.status(200)
             res.sendFile(process.cwd()+"/upload/"+image._id+"/"+image.name)
@@ -37,18 +37,16 @@ export class ImageController {
        
     }
     public async addImage(req: Request, res: Response) {
-        console.log(req.body)
         
         const file = req.files.file as UploadedFile
         
-        console.log(file.name)
+    
        const image = {
             name :file.name,
             tags : req.body.tags
         } as IImage
     
         const imageSaved =  await imageService.addImage(image)
-        console.log()
         fs.writeFileSync("upload/"+imageSaved._id+"/"+file.name,file.data)
         res.status(201)
         res.sendFile(process.cwd()+"/upload/"+imageSaved._id+"/"+file.name)

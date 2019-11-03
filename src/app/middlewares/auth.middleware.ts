@@ -13,9 +13,7 @@ const tokenRepository = new TokenRepository();
 const refreshTokenRepository = new RefreshTokenRepository()
 
 async function authMiddleware(request: RequestWithUser, response: Response, next: NextFunction) {
-  console.log("DIEUMI")
   const cookies = request.cookies;
-  console.log(cookies)
   const secret = "secret";
   if (cookies && cookies.Authorization) {
     try {
@@ -38,7 +36,9 @@ async function authMiddleware(request: RequestWithUser, response: Response, next
           const user = await userRepository.getUser(id);
           const tokenData = await authService.createToken(user);
           const refreshToken = await authService.createRefreshToken(user);
-          response.setHeader('Set-Cookie', [authService.createCookie(tokenData),authService.createCookieRefresh(refreshToken)]);
+         // response.setHeader('Set-Cookie', [authService.createCookie(tokenData),authService.createCookieRefresh(refreshToken)]);
+          response.setHeader('Authorization',JSON.stringify(tokenData));
+          response.setHeader('refreshToken',JSON.stringify(refreshToken));
           next()
         }
         response.status(401)
@@ -56,7 +56,9 @@ async function authMiddleware(request: RequestWithUser, response: Response, next
       const user = await userRepository.getUser(verificationResponseRefresh._id);
       const tokenData = await authService.createToken(user);
       const refreshToken = await authService.createRefreshToken(user);
-      response.setHeader('Set-Cookie', [authService.createCookie(tokenData),authService.createCookieRefresh(refreshToken)]);
+   // response.setHeader('Set-Cookie', [authService.createCookie(tokenData),authService.createCookieRefresh(refreshToken)]);
+      response.setHeader('Authorization',JSON.stringify(tokenData));
+      response.setHeader('refreshToken',JSON.stringify(refreshToken));
       next()
     }
     response.status(401)

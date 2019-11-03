@@ -16,7 +16,10 @@ export class Routes {
         app.route('/api').get(this.recipeController.test) 
         app.route('/api/recipe') 
         // GET endpoint 
-        .get(this.recipeController.getRecipe)        
+        .get(this.recipeController.getRecipe)     
+        app.route('/api/recipe/:userId') 
+        // GET endpoint 
+        .get(this.recipeController.getRecipe)     
         // POST endpoint
         .post(/*authMiddleware,*/this.recipeController.addNewRecipe)
         app.route('/api/image') 

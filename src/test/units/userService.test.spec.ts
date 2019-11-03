@@ -63,7 +63,7 @@ describe('user Service', () => {
           userId: user[0]._id
         }
       } as Request
-      const result = await userService.getUser(req)
+      const result = await userService.getUser(req.params.userId)
       expect(result).to.haveOwnProperty("userName").to.be.equal("testtttttt")
     });
     it('should return array of user s fridge', async () => {
@@ -98,7 +98,7 @@ describe('user Service', () => {
           userId: user[0]._id
         }
       } as Request
-      const res=await userService.getUser(req2)
+      const res=await userService.getUser(req2.params.userId)
       expect(res).to.haveOwnProperty("userName").to.be.equal("Thomas")
     });
     it('should return object with updated fridge', async () => {
@@ -118,7 +118,7 @@ describe('user Service', () => {
           userId: user[0]._id
         }
       } as Request
-      const res=await userService.getUser(req2)
+      const res=await userService.getUser(req2.params.userId)
       expect(res.fridge[0].quantity).to.be.equal(200)
     });
     it('should return object with added ingredient', async () => {
@@ -138,7 +138,7 @@ describe('user Service', () => {
           userId: user[0]._id
         },
       } as Request
-      const res=await userService.getUser(req2)
+      const res=await userService.getUser(req2.params.userId)
       expect(res.fridge).to.be.lengthOf(2)
     });
     it('should delete all ingredient ', async () => {
@@ -158,7 +158,7 @@ describe('user Service', () => {
           userId: user[0]._id
         },
       } as Request
-      const res=await userService.getUser(req2)
+      const res=await userService.getUser(req2.params.userId)
       expect(res.fridge).to.be.lengthOf(0)
     });
   })

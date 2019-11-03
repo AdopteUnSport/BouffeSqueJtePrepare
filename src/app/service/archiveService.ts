@@ -15,12 +15,12 @@ import { IArchive, IIngredient } from '../interface';
        return this.archiveRepository.getAllArchive()
     }
     public async getArchive(req: Request) {
-        console.log(JSON.stringify(this))
+
 
         return this.archiveRepository.getArchiveById(req.params.archiveId)
     }
     public async getArchiveByUserId(req: Request) {
-        console.log(JSON.stringify(this))
+     
 
         return this.archiveRepository.getArchiveByUserId(req.params.userId)
     }

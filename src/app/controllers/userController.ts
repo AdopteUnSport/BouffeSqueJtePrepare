@@ -15,7 +15,7 @@ export class UserController {
 
     public async getUser(req: Request, res: Response) {
         res.status(200)
-        res.json(await userService.getUser(req))
+        res.json(await userService.getUser(req.params.userId))
     }
     public async updateUser(req: Request, res: Response) {
 

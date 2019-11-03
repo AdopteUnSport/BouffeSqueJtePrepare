@@ -15,7 +15,6 @@ const elasticSearch = require('elasticsearch')
     })
     public async addImage (image: IImage) : Promise<IImage> {  
         const imageSaved=  await this.imageRepository.addNewImage(image)
-        console.log("tessst")
         fs.mkdirSync("upload/"+imageSaved._id)
         return imageSaved
     }
@@ -61,7 +60,6 @@ const elasticSearch = require('elasticsearch')
             })    
         }
        
-        console.log(JSON.stringify(response.hits.hits[0]))
         if(response.hits.hits[0]){
             const img =  {
                 _id :response.hits.hits[0]._id,

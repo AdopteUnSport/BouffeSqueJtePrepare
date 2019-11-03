@@ -26,9 +26,7 @@ export class RecipeRepository{
     public async updateRecipe (newRecipe:IRecipe) : Promise<IRecipe> {
         try {
             const id = newRecipe._id;
-            console.log("patate0"+id)
             delete newRecipe._id
-            console.log("patate"+id)
             const doc = await  Recipe.findByIdAndUpdate(id,newRecipe)
             return   doc.toObject()
         } catch (error) {
@@ -62,9 +60,8 @@ export class RecipeRepository{
     }
     public async getRecipeById (id:string): Promise<IRecipe>  { 
         try {
-            console.log("patate")               
+          
             const doc =await Recipe.findById(id)
-             console.log("patate")
              return doc.toObject()
         } catch (error) {
             console.log(error)
@@ -75,13 +72,11 @@ export class RecipeRepository{
     public async getAll (): Promise<IRecipe[]> {    
         try {
           
-            const doc = await Recipe.find()
-            console.log("test"+JSON.stringify(doc))    
+            const doc = await Recipe.find()   
             const arrayRecipe =[];
             await  doc.forEach(element=>{
                 arrayRecipe.push(element.toObject())
             })
-            console.log("test"+arrayRecipe)    
          return arrayRecipe
         } catch (error) {
             console.log(error)
@@ -90,7 +85,6 @@ export class RecipeRepository{
     }
     public async getRecipeByIngredient (params:IRecipeParametter): Promise<IRecipe[]> {    
         try {
-            console.log("ByIngreient"+JSON.stringify(params))
         
             const doc = await  Recipe.find({"listIngredient.name":"params.listIngredient.name"})
             const arrayRecipe =[];

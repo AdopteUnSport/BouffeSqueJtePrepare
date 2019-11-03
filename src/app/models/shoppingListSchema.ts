@@ -9,8 +9,16 @@ export const shoppingListSchema = new Schema({
     type:Boolean,
     required : true,
  
-},
-  
+  },
+  periode : {
+    type: String,
+    required:true
+  },
+
+  reNew : {
+    type:Boolean,
+    required:true
+  },
   shoppingList: [ingredientSchema]
   
 });

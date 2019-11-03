@@ -20,7 +20,6 @@ import { ShoppingList } from "../interface/shoppingList.model";
      
         const users :IUser[] =await  this.userRepository.getUsersByName(req.query.userName)
         let res  ;
-        console.log(JSON.stringify(users))
         for(var user of users){
             if(user.userName===req.query.userName && user.password===req.query.password){
                 res = user;
@@ -31,10 +30,10 @@ import { ShoppingList } from "../interface/shoppingList.model";
         }
         return res;
     }
-    public async getUser(req: Request) {
+    public async getUser(userId:string) : Promise<IUser> {
       
 
-        return this.userRepository.getUser(req.params.userId)
+        return this.userRepository.getUser(userId)
     }
     public async getUserByEmail(req: Request) {
    

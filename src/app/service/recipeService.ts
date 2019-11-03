@@ -2,7 +2,7 @@
 import { Request, response } from 'express';
 import { IRecipe } from '../interface';
 import { RecipeRepository, IRecipeParametter } from "../repository/recipeRepository";
-import { isArray } from 'util';
+import { userService } from './userService';
 const elasticSearch = require('elasticsearch')
 class RecipeService {
     private recipeRepository = new RecipeRepository()
@@ -14,7 +14,6 @@ class RecipeService {
     public async addNewRecipe(recipe: IRecipe) {
        
         const res = await this.recipeRepository.addNewRecipe(recipe)
-        console.log("PATATA" + JSON.stringify(res))
         return res
     }
     public async updateRecipe(req: Request) {
@@ -24,20 +23,24 @@ class RecipeService {
     }
     public async deleteRecipe(req: Request) {
         const newRecipe = req.params.recipeId as string
-        console.log("patae" + JSON.stringify(newRecipe))
+
         return await this.recipeRepository.deleteRecipe(newRecipe)
     }
     public async getRecipe(req: Request) {
+        const id = req.query.userId ? req.query.userId : null;
+        let listIngredient=null;
+        if(id){
+            listIngredient =  (await userService.getUser(id)).fridge
+        }
         const params = {
             text: req.query.text ? req.query.text : null,
-            listIngredient: req.body.listIngredient ? req.body.listIngredient : null,
+            listIngredient: listIngredient
         } as IRecipeParametter
 
 
-        if (!params.text && !params.listIngredient) {
-
+        if (!params.text && !id) {
             return await this.recipeRepository.getAll()
-        } else if (params.text && !params.listIngredient) {
+        } else if (params.text && !id) {
            return await this.recipeRepository.getRecipeByText(params)
         }
 
@@ -85,7 +88,6 @@ class RecipeService {
                    
                     const index = recipeByIngredient.findIndex(x => (x._source.name == element._source.name))
                     delete recipeByIngredient[index]
-                    console.log("deleted")
                     break;
                 }
             }
@@ -104,13 +106,11 @@ class RecipeService {
     public cleanSearch(eSresult:any){
        const hits=eSresult.hits.hits;
        const cleanSearch :any[]= hits.map(element =>{
-        
           return {
             ...element._source,
             "_id":element._id
           } 
         }).filter(x=> x!=null)
-        console.log(cleanSearch)
        return cleanSearch
     }
     public async getRecipeById(req: Request) {

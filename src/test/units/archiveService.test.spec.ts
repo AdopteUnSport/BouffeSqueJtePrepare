@@ -23,7 +23,7 @@ describe('archive Service', () => {
       
       const result = await archiveService.getAllArchive()
       expect(result).to.be.an("array").of.lengthOf(0)
-    });
+    }).timeout(5000);;
     it('should return array of length 1', async () => {
       const reqPost = {
         body: {

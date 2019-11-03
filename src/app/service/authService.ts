@@ -11,8 +11,6 @@ import { RefreshTokenRepository } from '../repository/refreshTokenRepository';
     private refreshTokenRepository = new RefreshTokenRepository()
     public async createToken(user: IUser): Promise<TokenData> {
         const expiresIn = new Date().getTime() + 3600000  // an hour
-        console.log(expiresIn)
-        console.log(expiresIn+36000)
         const secret = "secret"; //change by process.env + add bcrypt
         const dataStoredInToken: DataStoredInToken = {
           _id: user._id,
@@ -26,8 +24,7 @@ import { RefreshTokenRepository } from '../repository/refreshTokenRepository';
       }
       public async createRefreshToken(user: IUser): Promise<TokenData> {
         const expiresIn = new Date().getTime() + 432600000  // five Day
-        console.log(expiresIn)
-        console.log(expiresIn+36000)
+
         const secret = "secret"; //change by process.env + add bcrypt
         const dataStoredInToken: DataStoredInToken = {
           _id: user._id,
@@ -40,8 +37,7 @@ import { RefreshTokenRepository } from '../repository/refreshTokenRepository';
         };
       }
       public createCookie(tokenData: TokenData) {
-        console.log(`Authorization=${tokenData.token}; HttpOnly; Max-Age=${tokenData.expiresIn}`)
-        return `Authorization=${tokenData.token}; HttpOnly; Max-Age=${tokenData.expiresIn}`;
+        return tokenData;
       }
       public createCookieRefresh(tokenData: TokenData) {
         return `refreshToken=${tokenData.token}; HttpOnly; Max-Age=${tokenData.expiresIn}`;

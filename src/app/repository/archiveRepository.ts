@@ -43,7 +43,6 @@ public async addNewArchive (archiveNew:IArchive) {
     }
     public async  getArchiveByUserId(id : string) {
         try {
-            console.log("PATAE"+id)
             const doc = await Archive.findOne({userId:id})
         return doc.toObject()
         } catch (error) {

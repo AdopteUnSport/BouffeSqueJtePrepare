@@ -51,9 +51,8 @@ public async  addNewUser (userNew:IUser) {
     }
     public async  getUsersByName(byName : string) {
         try {
-            console.log("PATATE"+byName)
+          
             const doc = await User.find({userName: byName}).exec()
-            console.log(JSON.stringify(doc))
             const res =[]
             await doc.forEach(element=>{
                 res.push(element.toObject())
@@ -66,7 +65,6 @@ public async  addNewUser (userNew:IUser) {
     }
     public async updateUser(id: string , updatedUser : IUser) {
         try {
-            console.log(JSON.stringify(updatedUser))
             const doc = await User.findByIdAndUpdate(id,updatedUser)
 
             return doc.toObject()
