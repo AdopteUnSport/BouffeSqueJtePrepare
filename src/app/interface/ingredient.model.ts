@@ -7,5 +7,6 @@ export interface IIngredient {
     category: ICategory;
     name: string;
     quantity : number;
+    unity :string; 
     tags: Array<string>;
 }

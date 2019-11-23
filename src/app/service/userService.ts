@@ -42,6 +42,7 @@ import { ShoppingList } from "../interface/shoppingList.model";
     }
     public async updateUser(req: Request) {
         const updatedUser = req.body as IUser
+        console.log("carotte"+JSON.stringify(updatedUser))
         return await this.userRepository.updateUser(req.params.userId,updatedUser)
     }
     public async deleteUser(req: Request) {

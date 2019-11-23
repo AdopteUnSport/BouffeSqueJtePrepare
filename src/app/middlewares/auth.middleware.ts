@@ -13,11 +13,14 @@ const tokenRepository = new TokenRepository();
 const refreshTokenRepository = new RefreshTokenRepository()
 
 async function authMiddleware(request: RequestWithUser, response: Response, next: NextFunction) {
-  const cookies = request.cookies;
+  const cookies = request;
+ 
   const secret = "secret";
-  if (cookies && cookies.Authorization) {
+  if (cookies && cookies.get("authorization")) {
     try {
-      const verificationResponse = jwt.verify(cookies.Authorization, secret) as DataStoredInToken;
+      const token = JSON.parse(cookies.get("authorization"))
+      const verificationResponse = jwt.verify(token.token, secret) as DataStoredInToken;
+    
       const id = verificationResponse._id;
       if(verificationResponse.expireIn>new Date().getTime()){
         const user = await userRepository.getUser(id);
@@ -30,8 +33,11 @@ async function authMiddleware(request: RequestWithUser, response: Response, next
         }
       }else{
         await tokenRepository.deletetoken(verificationResponse._id)
-        const verificationResponseRefresh = jwt.verify(cookies.refreshToken, secret) as DataStoredInToken;
-        if(cookies.refreshToken && verificationResponseRefresh.expireIn>new Date().getTime()){
+        const verificationRefresh =JSON.parse(cookies.get("refreshToken"))
+        console.log("carrote"+verificationRefresh)
+        const verificationResponseRefresh = jwt.verify(verificationRefresh.token, secret) as DataStoredInToken;
+        console.log("patate"+JSON.stringify(verificationResponseRefresh))
+        if(cookies.get("refreshToken") && verificationResponseRefresh.expireIn>new Date().getTime()){
           await refreshTokenRepository.deletetoken(verificationResponseRefresh._id)
           const user = await userRepository.getUser(id);
           const tokenData = await authService.createToken(user);
@@ -39,19 +45,23 @@ async function authMiddleware(request: RequestWithUser, response: Response, next
          // response.setHeader('Set-Cookie', [authService.createCookie(tokenData),authService.createCookieRefresh(refreshToken)]);
           response.setHeader('Authorization',JSON.stringify(tokenData));
           response.setHeader('refreshToken',JSON.stringify(refreshToken));
+          console.log("carrote0")
           next()
+        }else{
+          response.status(401)
+          next(new Error("Authorization expired"));
         }
-        response.status(401)
-        next(new Error("Authorization expired"));
+       
       }
      
     } catch (error) {
+      console.log(error)
       response.status(401)
       next(new Error("Authorization INvalid"));
     }
   } else {
-    const verificationResponseRefresh = jwt.verify(cookies.refreshToken, secret) as DataStoredInToken;
-    if(cookies.refreshToken && verificationResponseRefresh.expireIn>new Date().getTime()){
+    const verificationResponseRefresh = jwt.verify(cookies.get("refreshToken"), secret) as DataStoredInToken;
+    if(cookies.get("refreshToken") && verificationResponseRefresh.expireIn>new Date().getTime()){
       await refreshTokenRepository.deletetoken(verificationResponseRefresh._id)
       const user = await userRepository.getUser(verificationResponseRefresh._id);
       const tokenData = await authService.createToken(user);

@@ -9,6 +9,9 @@ var ingredientSchema = new Schema({
         type:Number,
         required : true
     },
+    unity: {
+        type:String
+    },
     category: categorySchema,
     status: ["fresh","out of date"],
     name: {

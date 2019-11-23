@@ -65,8 +65,10 @@ public async  addNewUser (userNew:IUser) {
     }
     public async updateUser(id: string , updatedUser : IUser) {
         try {
-            const doc = await User.findByIdAndUpdate(id,updatedUser)
-
+            console.log("DIEUMI3"+id)
+             await User.findByIdAndUpdate(id,updatedUser)
+             const doc = await User.findById(id)
+          
             return doc.toObject()
         } catch (error) {
             console.log(error)

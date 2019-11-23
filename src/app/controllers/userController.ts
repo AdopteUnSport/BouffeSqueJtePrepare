@@ -18,9 +18,11 @@ export class UserController {
         res.json(await userService.getUser(req.params.userId))
     }
     public async updateUser(req: Request, res: Response) {
-
         res.status(202)
-        res.json(await userService.updateUser(req))
+        const updaptedUser  = await userService.updateUser(req);
+        res.setHeader('content-type','application/json') 
+  
+        res.status(200).send(updaptedUser)
     }
     public async deleteUser(req: Request, res: Response) {
         res.status(202)
